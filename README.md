@@ -11,6 +11,7 @@
 | Endpoint | 
 |--|
 | *GET*    /campaigns |
+| *GET*    /campaign/:id |
 | *GET*    /campaign/:id/result | 
 | *POST*   /campaign/|
 | *POST*   /campaigns/:id|
