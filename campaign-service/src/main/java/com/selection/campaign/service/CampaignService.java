@@ -1,5 +1,6 @@
 package com.selection.campaign.service;
 
+import com.selection.campaign.model.Campaign;
 import com.selection.campaign.model.CampaignResult;
 import com.selection.campaign.model.VoteResult;
 import com.selection.campaign.repository.CampaignRepository;
@@ -22,5 +23,9 @@ public class CampaignService {
 
     public String createCampaign() {
         return campaignRepository.createCampaign();
+    }
+
+    public ArrayList<Campaign> getAllCampaigns() {
+        return campaignRepository.getAllCampaigns();
     }
 }

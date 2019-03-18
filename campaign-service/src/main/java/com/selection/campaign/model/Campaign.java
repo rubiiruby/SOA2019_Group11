@@ -1,4 +1,4 @@
-package main.java.com.selection.campaign.model;
+package com.selection.campaign.model;
 
 import com.selection.campaign.model.Candidate;
 

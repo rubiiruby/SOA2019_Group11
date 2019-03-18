@@ -1,5 +1,6 @@
 package com.selection.campaign.repository;
 
+import com.selection.campaign.model.Campaign;
 import com.selection.campaign.model.CampaignResult;
 import com.selection.campaign.model.Candidate;
 import com.selection.campaign.model.VoteResult;
@@ -26,4 +27,12 @@ public class CampaignRepository {
         return result;
     }
 
+    public ArrayList<Campaign> getAllCampaigns() {
+        ArrayList<Candidate> mockCandidate = new ArrayList<>();
+        mockCandidate.add(new Candidate("prayuth.jpg", "mr.prayuth", 67000000));
+        mockCandidate.add(new Candidate("prayuthSmile.jpg", "mr.prayuth", 99999999));
+        ArrayList<Campaign> campaigns = new ArrayList<>();
+        campaigns.add(new Campaign("thailand elect", "just thailand election", "24/3/2019", "image", mockCandidate));
+        return campaigns;
+    }
 }
