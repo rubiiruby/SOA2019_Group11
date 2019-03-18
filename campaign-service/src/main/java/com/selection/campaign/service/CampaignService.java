@@ -28,4 +28,6 @@ public class CampaignService {
     public ArrayList<Campaign> getAllCampaigns() {
         return campaignRepository.getAllCampaigns();
     }
+
+    public Campaign getCampaignById(String campaignId) {return campaignRepository.getCampaignById(campaignId); }
 }
