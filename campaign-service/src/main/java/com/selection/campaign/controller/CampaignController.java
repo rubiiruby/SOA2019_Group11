@@ -1,5 +1,6 @@
 package com.selection.campaign.controller;
 
+import com.selection.campaign.model.Campaign;
 import com.selection.campaign.model.CampaignResult;
 import com.selection.campaign.model.VoteResult;
 import com.selection.campaign.service.CampaignService;
@@ -38,4 +39,8 @@ public class CampaignController {
         response.put("result", campaignService.createCampaign());
         return response;
     }
+
+    //get campaign by id
+    @GetMapping("/campaign/{id}")
+    public Campaign getCampaignById(@PathVariable String campaignId) {return campaignService.getCampaignById(campaignId);}
 }

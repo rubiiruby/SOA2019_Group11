@@ -7,17 +7,17 @@ public class Candidate {
     private String detail;
     private int voteAmount;
 
-    public Candidate(String imgURL, String name, int voteAmount) {
+    public Candidate(String imgURL, String name) {
         this.imgURL = imgURL;
         this.name = name;
-        this.voteAmount = voteAmount;
+        this.voteAmount = 0;
     }
 
-    public Candidate(String imgURL, String name, String detail, int voteAmount) {
+    public Candidate(String imgURL, String name, String detail) {
         this.imgURL = imgURL;
         this.name = name;
         this.detail = detail;
-        this.voteAmount = voteAmount;
+        this.voteAmount = 0;
     }
 
     public Candidate() {
