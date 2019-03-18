@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CampaignResult {
 
     private String campaignId;
-    private ArrayList candidateScore;
+    private ArrayList<Candidate> candidateScore;
 
     public CampaignResult(String campaignId, ArrayList candidateScore) {
         this.campaignId = campaignId;
