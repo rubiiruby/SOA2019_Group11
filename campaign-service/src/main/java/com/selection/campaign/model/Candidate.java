@@ -4,12 +4,24 @@ public class Candidate {
 
     private String imgURL;
     private String name;
+    private String detail;
     private int voteAmount;
 
     public Candidate(String imgURL, String name, int voteAmount) {
         this.imgURL = imgURL;
         this.name = name;
         this.voteAmount = voteAmount;
+    }
+
+    public Candidate(String imgURL, String name, String detail, int voteAmount) {
+        this.imgURL = imgURL;
+        this.name = name;
+        this.detail = detail;
+        this.voteAmount = voteAmount;
+    }
+
+    public Candidate() {
+
     }
 
     public String getImgURL() {
@@ -27,6 +39,10 @@ public class Candidate {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getDetail() { return detail; }
+
+    public void setDetail(String detail) { this.detail = detail; }
 
     public int getVoteAmount() {
         return voteAmount;
