@@ -34,8 +34,8 @@ public class CampaignController {
     //create campaign
     @PostMapping("/campaign")
     public HashMap<String, String> createCampaign() {
-        HashMap<String, String> map = new HashMap<>();
-        map.put("result", campaignService.createCampaign());
-        return map;
+        HashMap<String, String> response = new HashMap<>();
+        response.put("result", campaignService.createCampaign());
+        return response;
     }
 }
