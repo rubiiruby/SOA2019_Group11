@@ -7,7 +7,7 @@ public class CampaignResult {
     private String campaignId;
     private ArrayList<Candidate> candidateScore;
 
-    public CampaignResult(String campaignId, ArrayList candidateScore) {
+    public CampaignResult(String campaignId, ArrayList<Candidate> candidateScore) {
         this.campaignId = campaignId;
         this.candidateScore = candidateScore;
     }
@@ -20,11 +20,11 @@ public class CampaignResult {
         this.campaignId = campaignId;
     }
 
-    public ArrayList getCandidateScore() {
+    public ArrayList<Candidate> getCandidateScore() {
         return candidateScore;
     }
 
-    public void setCandidateScore(ArrayList candidateScore) {
+    public void setCandidateScore(ArrayList<Candidate> candidateScore) {
         this.candidateScore = candidateScore;
     }
 }

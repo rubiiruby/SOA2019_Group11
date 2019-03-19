@@ -21,13 +21,13 @@ public class CampaignController {
     }
 
     //vote
-    @PostMapping("/campaign/{id}")
-    public VoteResult vote(@PathVariable String id) {
-        return campaignService.vote(id);
+    @PostMapping("/campaign/{candidateId}")
+    public VoteResult vote(@PathVariable String candidateId) {
+        return campaignService.vote(candidateId);
     }
 
     //get vote result
-    @GetMapping("/campaign/{id}/result")
+    @GetMapping("/campaign/{campaignId}/result")
     public CampaignResult getCampaignResult(@PathVariable String campaignId) {
         return campaignService.getCampaignResult(campaignId);
     }

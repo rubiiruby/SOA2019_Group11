@@ -1,7 +1,5 @@
 package com.selection.campaign.model;
 
-import com.selection.campaign.model.Candidate;
-
 import java.util.ArrayList;
 
 public class Campaign {

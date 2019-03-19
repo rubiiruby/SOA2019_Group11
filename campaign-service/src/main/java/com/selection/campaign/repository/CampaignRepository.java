@@ -12,13 +12,13 @@ import java.util.ArrayList;
 public class CampaignRepository {
 
     public VoteResult vote(String id) {
-        return new VoteResult(": prayuth", "success", "12346");
+        return new VoteResult("prayuth", "success", "12346");
     }
 
     public CampaignResult getCampaignResult(String campaignId) {
         ArrayList<Candidate> mockCandidate = new ArrayList<>();
-        mockCandidate.add(new Candidate("prayuth.jpg", "mr.prayuth"));
-        mockCandidate.add(new Candidate("prayuthSmile.jpg", "mr.prayuth"));
+        mockCandidate.add(new Candidate("prayuth.jpg", "mr.prayuth", 99999));
+        mockCandidate.add(new Candidate("prayuthSmile.jpg", "mr.prayuth", 123456));
         return new CampaignResult(campaignId, mockCandidate);
     }
 
