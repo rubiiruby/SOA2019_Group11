@@ -28,8 +28,8 @@ public class CampaignController {
 
     //get vote result
     @GetMapping("/campaign/{id}/result")
-    public CampaignResult getCampaignResult(@PathVariable String id) {
-        return campaignService.getCampaignResult(id);
+    public CampaignResult getCampaignResult(@PathVariable String campaignId) {
+        return campaignService.getCampaignResult(campaignId);
     }
 
     //create campaign
@@ -41,6 +41,6 @@ public class CampaignController {
     }
 
     //get campaign by id
-    @GetMapping("/campaign/{id}")
+    @GetMapping("/campaign/{campaignId}")
     public Campaign getCampaignById(@PathVariable String campaignId) {return campaignService.getCampaignById(campaignId);}
 }
