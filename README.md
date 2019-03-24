@@ -26,5 +26,22 @@
 
 ***example***
 GET soa-project-selection-234112.appspot.com/campaign/112/result <br>
-Response: `{"campaignId":"112","candidateScore":[{"imgURL":"prayuth.jpg","name":"mr.prayuth","detail":null,"voteAmount":67000000},{"imgURL":"prayuthSmile.jpg","name":"mr.prayuth","detail":null,"voteAmount":99999999}]}`
+Response:
+
+    {
+        "campaignId":"112",
+        "candidateScore":[
+            {
+                "imgURL":"prayuth.jpg",
+                "name":"mr.prayuth",
+                "detail":null,
+                "voteAmount":67000000
+            },{
+                "imgURL":"prayuthSmile.jpg",
+                "name":"mr.prayuth",
+                "detail":null,
+                "voteAmount":99999999
+            }
+        ]
+    }
 
