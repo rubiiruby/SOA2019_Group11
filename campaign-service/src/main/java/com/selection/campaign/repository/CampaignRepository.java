@@ -41,5 +41,5 @@ public class CampaignRepository {
         mockCandidates.add(new Candidate("prayuth.jpg", "mr.prayuth"));
         mockCandidates.add(new Candidate("prayuthSmile.jpg", "mr.prayuth"));
         return new Campaign("Thailand Election", "Just a Fair Election", "2017-08-19 12:17:55", "CampaignImage-1", mockCandidates);
-}
+    }
 }
