@@ -1,13 +1,14 @@
 
 ## **How to run**
 
- - **git clone**<br>`https://github.com/rubiiruby/SOA2019_Group11.git`
- - **compile** 
+ - **git clone**<br>
+ `https://github.com/rubiiruby/SOA2019_Group11.git`
+ - **compile**<br>
  `mvnw clean package`
-  - **run**
-`mvnw spring-boot:run`
-  - **test**
-  `mvnw test`
+ - **run**<br>
+ `mvnw spring-boot:run`
+ - **test**<br>
+ `mvnw test`
 
 ## **API**
 | Endpoint | 
