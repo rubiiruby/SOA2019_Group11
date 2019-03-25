@@ -1,13 +1,14 @@
 
 ## **How to run**
 
- - **git clone**<br>`https://github.com/rubiiruby/SOA2019_Group11.git`
- - **compile** 
+ - **git clone**<br>
+ `https://github.com/rubiiruby/SOA2019_Group11.git`
+ - **compile**<br>
  `mvnw clean package`
-  - **run**
-`mvnw spring-boot:run`
-  - **test**
-  `mvnw test`
+ - **run**<br>
+ `mvnw spring-boot:run`
+ - **test**<br>
+ `mvnw test`
 
 ## **API**
 | Endpoint | 
@@ -25,5 +26,22 @@
 
 ***example***
 GET soa-project-selection-234112.appspot.com/campaign/112/result <br>
-Response: `{"campaignId":"112","candidateScore":[{"imgURL":"prayuth.jpg","name":"mr.prayuth","detail":null,"voteAmount":67000000},{"imgURL":"prayuthSmile.jpg","name":"mr.prayuth","detail":null,"voteAmount":99999999}]}`
+Response:
+
+    {
+        "campaignId": "112",
+        "candidateScore": [
+            {
+                "imgURL": "prayuth.jpg",
+                "name": "mr.prayuth",
+                "detail": null,
+                "voteAmount": 67000000
+            },{
+                "imgURL": "prayuthSmile.jpg",
+                "name": "mr.prayuth",
+                "detail": null,
+                "voteAmount": 99999999
+            }
+        ]
+    }
 
