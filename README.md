@@ -1,5 +1,5 @@
 
-## **How to run**
+## **How to run**  (only campaign service!!)
 
  - **git clone**<br>
  `https://github.com/rubiiruby/SOA2019_Group11.git`
