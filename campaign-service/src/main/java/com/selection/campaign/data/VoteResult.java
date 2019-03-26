@@ -1,30 +1,33 @@
-package com.selection.campaign.model;
+package com.selection.campaign.data;
 
 public class VoteResult {
 
-    private String vote;
-    private String result;
+    private Long vote;
+    private Integer result;
     private String otp;
 
-    public VoteResult(String vote, String result, String otp) {
+    public VoteResult() {
+    }
+
+    public VoteResult(Long vote, Integer result, String otp) {
         this.vote = vote;
         this.result = result;
         this.otp = otp;
     }
 
-    public String getVote() {
+    public Long getVote() {
         return vote;
     }
 
-    public void setVote(String vote) {
+    public void setVote(Long vote) {
         this.vote = vote;
     }
 
-    public String getResult() {
+    public Integer getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(Integer result) {
         this.result = result;
     }
 
