@@ -1,6 +1,6 @@
 import React from "react";
-import AppBar from "./component/AppBar";
+import AppBarContainer from "./container/AppBarContainer";
 
-const App = props => <AppBar />;
+const App = props => <AppBarContainer />;
 
 export default App;
