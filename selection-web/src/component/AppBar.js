@@ -2,12 +2,12 @@ import React from "react";
 import { Menu, Button, Responsive } from "semantic-ui-react";
 import "../semantic/dist/semantic.min.css";
 
-const AppBar = (desktop, updateEvent) => (
-  <Responsive onUpdate={() => updateEvent}>
+const AppBar = props => (
+  <Responsive fireOnMount onUpdate={props.updateEvent}>
     <Menu
       borderless
       style={{
-        padding: desktop ? "0em 0.5em" : "1em 10em"
+        padding: props.desktop ? "0em 10em" : "1em 1em"
       }}
       fixed="top"
       size="large"
@@ -17,7 +17,7 @@ const AppBar = (desktop, updateEvent) => (
       </Menu.Item>
       <Menu.Item
         position="right"
-        style={{ padding: desktop ? "1em 0em" : "0em 1em" }}
+        style={{ padding: props.desktop ? "1em 0em" : "0em 1em" }}
       >
         <Button>Sign in</Button>
         <Button as="a" primary style={{ marginLeft: "0.5em" }}>
