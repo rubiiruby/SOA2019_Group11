@@ -8,7 +8,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,4 +34,30 @@ class CampaignControllerTest {
         Campaign campaign = restTemplate.getForObject("/campaign/1", Campaign.class);
         assertEquals("Thailand Election", campaign.getName());
     }
+
+    @Test
+    void getCampaigns() {
+        ResponseEntity<ArrayList> response = restTemplate.getForEntity("/campaigns", ArrayList.class);
+        assertNotNull(response);
+    }
+
+    @Test
+    void postCampaign() {
+        ResponseEntity<HashMap> response = restTemplate.postForEntity("/campaign", null, HashMap.class);
+        assertEquals("success", response.getBody().get("result"));
+    }
+
+
+    @Test
+    void vote() {
+        VoteResult response = restTemplate.postForObject("/campaign/1", null, VoteResult.class);
+        assertEquals("prayuth", response.getVote());
+    }
+
+//    @Test
+//    void getAllCampaign() {
+//        Campaign campaigns = restTemplate.getForObject("/campaigns", Campaign.class);
+//        assertEquals("mr.prayuth", campaigns.getName());
+//    }
+
 }
