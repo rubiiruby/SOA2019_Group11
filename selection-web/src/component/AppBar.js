@@ -5,9 +5,12 @@ import "../semantic/dist/semantic.min.css";
 const AppBar = props => (
   <Responsive fireOnMount onUpdate={props.updateEvent}>
     <Menu
+      color="orange"
+      inverted
       borderless
       style={{
-        padding: props.desktop ? "0em 10em" : "1em 1em"
+        padding: props.mobile ? "1em 1em" : "0em 10em",
+        boxShadow: "none"
       }}
       fixed="top"
       size="large"
@@ -17,11 +20,15 @@ const AppBar = props => (
       </Menu.Item>
       <Menu.Item
         position="right"
-        style={{ padding: props.desktop ? "1em 0em" : "0em 1em" }}
+        style={{ padding: props.mobile ? "0em 1em" : "1em 0em" }}
       >
-        <Button>Sign in</Button>
-        <Button as="a" primary style={{ marginLeft: "0.5em" }}>
-          Sign Up
+        <Button
+          inverted
+          basic
+          borderless={props.mobile.toString()}
+          style={{ marginLeft: "0.5em" }}
+        >
+          Sign In
         </Button>
       </Menu.Item>
     </Menu>

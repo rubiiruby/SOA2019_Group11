@@ -6,7 +6,7 @@ import { Responsive } from "semantic-ui-react";
 
 const AppBarContainer = props => (
   <AppBar
-    desktop={props.width > Responsive.onlyMobile.maxWidth ? true : false}
+    mobile={props.width < Responsive.onlyMobile.maxWidth ? true : false}
     updateEvent={props.onUpdateWidth}
   />
 );
