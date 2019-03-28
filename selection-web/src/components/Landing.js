@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container, Header, Segment, Grid, Button } from "semantic-ui-react";
 
 const Landing = props => (
@@ -26,7 +27,9 @@ const Landing = props => (
         </Segment>
       </Grid.Row>
       <Grid.Row style={{ padding: "2em" }}>
-        <Button color="orange">Start your campaign</Button>
+        <Link to="/create-campaign">
+          <Button color="orange">Start your election</Button>
+        </Link>
       </Grid.Row>
     </Grid>
   </Container>

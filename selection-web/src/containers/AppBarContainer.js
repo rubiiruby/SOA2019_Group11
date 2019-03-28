@@ -1,5 +1,5 @@
 import React from "react";
-import AppBar from "../component/AppBar";
+import AppBar from "../components/AppBar";
 import { updateValue } from "../actions";
 import { connect } from "react-redux";
 import { Responsive } from "semantic-ui-react";

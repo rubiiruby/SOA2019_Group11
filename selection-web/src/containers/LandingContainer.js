@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Responsive } from "semantic-ui-react";
-import Landing from "../component/Landing";
+import Landing from "../components/Landing";
 
 const LandingContainer = props => (
   <Landing

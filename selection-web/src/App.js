@@ -1,15 +1,16 @@
-import React from "react";
-import AppBarContainer from "./container/AppBarContainer";
-import { Segment } from "semantic-ui-react";
-import LandingContainer from "./container/LandingContainer";
+import React, { Fragment } from "react";
+import Index from "./pages/Index";
+import { Route } from "react-router-dom";
+import CreateCampaign from "./pages/CreateCampaign";
 
-const App = props => (
-  <div>
-    <Segment>
-      <AppBarContainer />
-    </Segment>
-    <LandingContainer />
-  </div>
+const index = () => <Index />;
+const createCampaign = () => <CreateCampaign />;
+
+const App = () => (
+  <Fragment>
+    <Route exact path="/" component={index} />
+    <Route exact path="/create-campaign" component={createCampaign} />
+  </Fragment>
 );
 
 export default App;
