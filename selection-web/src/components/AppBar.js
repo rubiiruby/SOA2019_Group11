@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu, Button, Responsive } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import "../semantic/dist/semantic.min.css";
 
 const AppBar = props => (
@@ -16,8 +17,9 @@ const AppBar = props => (
       size="large"
     >
       <Menu.Item as="h2" style={{ padding: 0 }} header>
-        SELECTION
+        <Link to="/">SELECTION</Link>
       </Menu.Item>
+
       <Menu.Item
         position="right"
         style={{ padding: props.mobile ? "0em 1em" : "1em 0em" }}

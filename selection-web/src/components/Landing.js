@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, Header, Segment, Grid, Button } from "semantic-ui-react";
 
 const Landing = props => (
-  <Container
-    fluid
-    style={{ padding: props.mobile ? " 4em 2em" : "6em 10.5em" }}
-  >
+  <Container fluid style={{ padding: props.mobile ? "4em 2em" : "6em 10.5em" }}>
     <Grid textAlign="center">
       <Grid.Row>
         <Segment basic style={{ padding: 0, margin: 0 }} textAlign="center">
