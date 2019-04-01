@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Segment, Grid, Header, Input, Button } from "semantic-ui-react";
+import withUpdateStep from "../containers/withUpdateStep";
 
-const TitleForm = () => (
+const TitleForm = props => (
   <Fragment>
     <Segment
       basic
@@ -20,11 +21,11 @@ const TitleForm = () => (
       <Input placeholder="Title" fluid />
     </Grid.Row>
     <Grid.Row>
-      <Button basic floated="right">
+      <Button onClick={() => props.onUpdateStep(1)} basic floated="right">
         Next
       </Button>
     </Grid.Row>
   </Fragment>
 );
 
-export default TitleForm;
+export default withUpdateStep(TitleForm);

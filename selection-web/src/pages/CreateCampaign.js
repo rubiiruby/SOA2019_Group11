@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import AppBarContainer from "../containers/AppBarContainer";
 import { Segment, Grid } from "semantic-ui-react";
 import StepsContainer from "../containers/StepsContainer";
+import { connect } from "react-redux";
+import DescriptionFormContainer from "../containers/DescriptionFormContainer";
 import TitleForm from "../components/TitleForm";
 
 const CreateCampaign = props => (
@@ -18,10 +20,15 @@ const CreateCampaign = props => (
         <Grid.Row>
           <StepsContainer />
         </Grid.Row>
-        <TitleForm />
+        {props.step === 0 && <TitleForm />}
+        {props.step === 1 && <DescriptionFormContainer />}
       </Segment>
     </Grid>
   </Fragment>
 );
 
-export default CreateCampaign;
+const mapStateToProps = state => ({
+  step: state.currentStep
+});
+
+export default connect(mapStateToProps)(CreateCampaign);

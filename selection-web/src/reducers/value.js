@@ -2,7 +2,11 @@ export default function createValueWithNamedType(valueName) {
   return function(value = 0, action) {
     switch (action.type) {
       case `UPDATE_VALUE_${valueName}`:
-        return action.value;
+        if (valueName === "STEP" && action.value < value) {
+          return value;
+        } else {
+          return action.value;
+        }
       default:
         return value;
     }
