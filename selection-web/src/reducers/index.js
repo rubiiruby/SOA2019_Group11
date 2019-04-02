@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import createValueWithNamedType from "./value";
-import createImageWithNamedType from "./image";
+import createImageWithNamedType from "./images";
 
 export default combineReducers({
   width: createValueWithNamedType("WIDTH"),
