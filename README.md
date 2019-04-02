@@ -22,7 +22,7 @@
 
 ## **DEPLOY**
 
-**soa-project-selection-234112.appspot.com/**
+**https://soa-project-selection-234112.appspot.com/**
 
 ***example***
 GET soa-project-selection-234112.appspot.com/campaign/112/result <br>
