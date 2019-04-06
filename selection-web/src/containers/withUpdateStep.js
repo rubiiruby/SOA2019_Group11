@@ -4,8 +4,13 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 
 const withUpdateStep = WrappedComponent => props => {
-  return <WrappedComponent onUpdateStep={props.onUpdateStep} />;
+  return <WrappedComponent {...props} />;
 };
+
+const mapStateToProps = state => ({
+  step: state.createStep,
+  currentStep: state.currentStep
+});
 
 const mapDispatchToProps = dispatch => ({
   onUpdateStep: step => {
@@ -16,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   ),
   withUpdateStep

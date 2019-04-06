@@ -1,11 +1,10 @@
 import React from "react";
-import DescriptionForm from "../components/DescriptionForm";
 import { connect } from "react-redux";
-import { uploadImage } from "../actions";
+import { uploadImage, removeImage } from "../actions";
 import { useDropzone } from "react-dropzone";
-import withUpdateStep from "../containers/withUpdateStep";
+import ImagesForm from "../components/ImagesForm";
 
-const DescriptionFormContainer = props => {
+const ImagesFormContainer = props => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: files => {
       props.onUploadImages(
@@ -19,28 +18,29 @@ const DescriptionFormContainer = props => {
     accept: "image/*"
   });
   return (
-    <DescriptionForm
+    <ImagesForm
       images={props.images}
       onUploadImages={props.onUploadImages}
+      onRemoveImage={props.onRemoveImage}
       getRootProps={getRootProps}
       getInputProps={getInputProps}
       isDragActive={isDragActive}
-      onUpdateStep={props.onUpdateStep}
     />
   );
 };
 
 const mapDispatchToProps = dispatch => ({
-  onUploadImages: files => dispatch(uploadImage("PREVIEW", files))
+  onUploadImages: images => dispatch(uploadImage("PREVIEW", images)),
+  onRemoveImage: index => {
+    dispatch(removeImage("PREVIEW", index));
+  }
 });
 
 const mapStateToProps = state => ({
   images: state.previewImage
 });
 
-export default withUpdateStep(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(DescriptionFormContainer)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ImagesFormContainer);

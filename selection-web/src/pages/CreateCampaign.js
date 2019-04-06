@@ -1,15 +1,16 @@
 import React, { Fragment } from "react";
-import AppBarContainer from "../containers/AppBarContainer";
 import { Segment, Grid } from "semantic-ui-react";
-import StepsContainer from "../containers/StepsContainer";
-import { connect } from "react-redux";
-import DescriptionFormContainer from "../containers/DescriptionFormContainer";
 import TitleForm from "../components/TitleForm";
+import AppBar from "../components/AppBar";
+import DescriptionForm from "../components/DescriptionForm";
+import Steps from "../components/Steps";
+import withUpdateStep from "../containers/withUpdateStep";
+import ChoicesForm from "../components/ChoicesForm";
 
 const CreateCampaign = props => (
   <Fragment>
     <Segment style={{ margin: 0 }}>
-      <AppBarContainer />
+      <AppBar />
     </Segment>
     <Grid centered style={{ padding: "0 2em" }}>
       <Segment
@@ -18,17 +19,14 @@ const CreateCampaign = props => (
         style={{ paddingTop: "4em", paddingBottom: "0em", margin: 0 }}
       >
         <Grid.Row>
-          <StepsContainer />
+          <Steps />
         </Grid.Row>
-        {props.step === 0 && <TitleForm />}
-        {props.step === 1 && <DescriptionFormContainer />}
+        {props.currentStep === 0 && <TitleForm />}
+        {props.currentStep === 1 && <DescriptionForm />}
+        {props.currentStep === 2 && <ChoicesForm />}
       </Segment>
     </Grid>
   </Fragment>
 );
 
-const mapStateToProps = state => ({
-  step: state.currentStep
-});
-
-export default connect(mapStateToProps)(CreateCampaign);
+export default withUpdateStep(CreateCampaign);

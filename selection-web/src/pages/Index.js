@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
-import AppBarContainer from "../containers/AppBarContainer";
 import { Segment } from "semantic-ui-react";
-import LandingContainer from "../containers/LandingContainer";
+import AppBar from "../components/AppBar";
+import Landing from "../components/Landing";
 
 const Index = () => (
   <Fragment>
     <Segment>
-      <AppBarContainer />
+      <AppBar />
     </Segment>
-    <LandingContainer />
+    <Landing />
   </Fragment>
 );
 

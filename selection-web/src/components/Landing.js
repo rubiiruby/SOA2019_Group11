@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Header, Segment, Grid, Button } from "semantic-ui-react";
+import withResponsiveWidth from "../containers/withResponsiveWidth";
 
 const Landing = props => (
   <Container fluid style={{ padding: props.mobile ? "4em 2em" : "6em 10.5em" }}>
@@ -32,4 +33,4 @@ const Landing = props => (
   </Container>
 );
 
-export default Landing;
+export default withResponsiveWidth(Landing);

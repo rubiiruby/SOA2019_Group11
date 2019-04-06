@@ -1,5 +1,8 @@
 import React from "react";
 import { Step, Segment } from "semantic-ui-react";
+import { compose } from "redux";
+import withResponsiveWidth from "../containers/withResponsiveWidth";
+import withUpdateStep from "../containers/withUpdateStep";
 
 const Steps = props => {
   return (
@@ -12,7 +15,7 @@ const Steps = props => {
     >
       <Step.Group fluid unstackable>
         <Step
-          onClick={() => props.onUpdateCurrentStep(0)}
+          onClick={() => props.onUpdateStep(0)}
           active={props.step === 0 || props.currentStep === 0}
         >
           <Step.Content>
@@ -23,7 +26,7 @@ const Steps = props => {
           </Step.Content>
         </Step>
         <Step
-          onClick={() => props.onUpdateCurrentStep(1)}
+          onClick={() => props.onUpdateStep(1)}
           active={props.step >= 1 && props.currentStep === 1}
           disabled={props.step === 0}
         >
@@ -37,7 +40,7 @@ const Steps = props => {
           </Step.Content>
         </Step>
         <Step
-          onClick={() => props.onUpdateCurrentStep(2)}
+          onClick={() => props.onUpdateStep(2)}
           active={props.step === 2 && props.currentStep === 2}
           disabled={props.step <= 1}
         >
@@ -53,4 +56,7 @@ const Steps = props => {
   );
 };
 
-export default Steps;
+export default compose(
+  withUpdateStep,
+  withResponsiveWidth
+)(Steps);

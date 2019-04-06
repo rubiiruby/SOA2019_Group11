@@ -1,24 +1,17 @@
 import React, { Fragment } from "react";
-import { Segment, Grid, Header, Input, Button } from "semantic-ui-react";
+import { Grid, Input, Button } from "semantic-ui-react";
 import withUpdateStep from "../containers/withUpdateStep";
+import CreateCampaignDescription from "./CreateCampaignDescription";
 
 const TitleForm = props => (
   <Fragment>
-    <Segment
-      basic
-      textAlign="left"
-      style={{ padding: "2em 0 0 0", margin: "0" }}
-    >
-      <Grid.Row style={{ padding: 0 }}>
-        <Header as="h2">Write your election title</Header>
-      </Grid.Row>
-      <Grid.Row style={{ padding: "0.5em 0em" }}>
-        <p>Brief your title short and clear, Focus on your election purpose</p>
-      </Grid.Row>
-    </Segment>
+    <CreateCampaignDescription
+      header="Write your election title"
+      description="Brief your title short and clear, Focus on your election purpose"
+    />
 
     <Grid.Row style={{ padding: "1em 0" }}>
-      <Input placeholder="Title" fluid />
+      <Input focus autoFocus placeholder="Title" fluid />
     </Grid.Row>
     <Grid.Row>
       <Button onClick={() => props.onUpdateStep(1)} basic floated="right">
