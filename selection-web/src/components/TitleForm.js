@@ -9,9 +9,13 @@ const TitleForm = props => (
       header="Write your election title"
       description="Brief your title short and clear, Focus on your election purpose"
     />
-
     <Grid.Row style={{ padding: "1em 0" }}>
-      <Input focus autoFocus placeholder="Title" fluid />
+      <Input
+        onChange={event => props.onUpdateTitle(event.target.value)}
+        placeholder="Title"
+        fluid
+        defaultValue={props.title}
+      />
     </Grid.Row>
     <Grid.Row>
       <Button onClick={() => props.onUpdateStep(1)} basic floated="right">

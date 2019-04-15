@@ -8,6 +8,7 @@ const withResponsiveWidth = WrappedComponent => props => {
   return (
     <WrappedComponent
       mobile={props.width < Responsive.onlyMobile.maxWidth ? true : false}
+      tablet={props.width < Responsive.onlyTablet.maxWidth ? true : false}
       updateEvent={props.onUpdateWidth}
       {...props}
     />

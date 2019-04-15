@@ -10,12 +10,16 @@ const DescriptionForm = props => (
       header="Explain your election information"
       description="Add image, Explain the purpose of election"
     />
-
     <Grid.Row style={{ padding: 0 }}>
       <ImagesFormContainer />
       <Grid.Row>
         <Form>
-          <Form.TextArea autoFocus rows={8} placeholder="Description" />
+          <Form.TextArea
+            onChange={event => props.onUpdateDes(event.target.value)}
+            rows={8}
+            placeholder="Description"
+            defaultValue={props.description}
+          />
         </Form>
       </Grid.Row>
       <Grid.Row>

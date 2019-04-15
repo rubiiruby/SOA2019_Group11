@@ -19,9 +19,7 @@ const ImagesFormContainer = props => {
   });
   return (
     <ImagesForm
-      images={props.images}
-      onUploadImages={props.onUploadImages}
-      onRemoveImage={props.onRemoveImage}
+      {...props}
       getRootProps={getRootProps}
       getInputProps={getInputProps}
       isDragActive={isDragActive}

@@ -8,13 +8,14 @@ import thunk from "redux-thunk";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers";
 import { BrowserRouter } from "react-router-dom";
+import style from "./index.css";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const AppWithStore = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <App className={style.body} />
     </BrowserRouter>
   </Provider>
 );

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "gulp": "^3.9.1",
+    "lodash": "^4.17.11",
     "node": "^10.1.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
@@ -16,7 +17,9 @@
     "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.86.0",
-    "superagent": "^5.0.2"
+    "styled-components": "^4.2.0",
+    "superagent": "^5.0.2",
+    "uniqid": "^5.0.3"
   },
   "scripts": {
     "start": "npm run build-semantic && react-scripts start",

@@ -5,6 +5,11 @@ import withResponsiveWidth from "../containers/withResponsiveWidth";
 import withUpdateStep from "../containers/withUpdateStep";
 
 const Steps = props => {
+  const styles = {
+    step: {
+      padding: props.tablet ? "0.85em" : "1.2em"
+    }
+  };
   return (
     <Segment
       basic
@@ -13,8 +18,9 @@ const Steps = props => {
         margin: 0
       }}
     >
-      <Step.Group fluid unstackable>
+      <Step.Group size={props.tablet ? "mini" : "small"} fluid unstackable>
         <Step
+          style={styles.step}
           onClick={() => props.onUpdateStep(0)}
           active={props.step === 0 || props.currentStep === 0}
         >
@@ -26,6 +32,7 @@ const Steps = props => {
           </Step.Content>
         </Step>
         <Step
+          style={styles.step}
           onClick={() => props.onUpdateStep(1)}
           active={props.step >= 1 && props.currentStep === 1}
           disabled={props.step === 0}
@@ -40,6 +47,7 @@ const Steps = props => {
           </Step.Content>
         </Step>
         <Step
+          style={styles.step}
           onClick={() => props.onUpdateStep(2)}
           active={props.step === 2 && props.currentStep === 2}
           disabled={props.step <= 1}
@@ -48,6 +56,19 @@ const Steps = props => {
             <Step.Title>Choices</Step.Title>
             {!props.mobile && (
               <Step.Description>Add your election choices</Step.Description>
+            )}
+          </Step.Content>
+        </Step>
+        <Step
+          style={styles.step}
+          onClick={() => props.onUpdateStep(3)}
+          active={props.step === 3 && props.currentStep === 3}
+          disabled={props.step <= 2}
+        >
+          <Step.Content>
+            <Step.Title>Options</Step.Title>
+            {!props.mobile && (
+              <Step.Description>Choose date and times</Step.Description>
             )}
           </Step.Content>
         </Step>

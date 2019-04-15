@@ -1,32 +1,45 @@
-import React, { Fragment } from "react";
-import { Segment, Grid } from "semantic-ui-react";
-import TitleForm from "../components/TitleForm";
+import React from "react";
+import { Segment, Grid, Responsive } from "semantic-ui-react";
 import AppBar from "../components/AppBar";
-import DescriptionForm from "../components/DescriptionForm";
 import Steps from "../components/Steps";
 import withUpdateStep from "../containers/withUpdateStep";
-import ChoicesForm from "../components/ChoicesForm";
+import TitleFormContainer from "../containers/TitleFormContainer";
+import DescriptionFormContainer from "../containers/DescriptionFormContainer";
+import { createGlobalStyle } from "styled-components";
+import ChoicesFormContainer from "../containers/ChoicesFormContainer";
+import withResponsiveWidth from "../containers/withResponsiveWidth";
+
+const GlobalStyle = createGlobalStyle`
+  html  {
+  height: auto;
+  background-color: #fafafa;
+  }
+  #root  {
+    height: auto;
+    background-color: #fafafa;
+  }
+`;
 
 const CreateCampaign = props => (
-  <Fragment>
-    <Segment style={{ margin: 0 }}>
-      <AppBar />
-    </Segment>
+  <Responsive fireOnMount onUpdate={props.updateEvent}>
+    {!props.mobile && (
+      <Segment>
+        <AppBar />
+      </Segment>
+    )}
+
     <Grid centered style={{ padding: "0 2em" }}>
-      <Segment
-        textAlign="left"
-        basic
-        style={{ paddingTop: "4em", paddingBottom: "0em", margin: 0 }}
-      >
+      <Segment textAlign="left" style={{ margin: "4em 0 4em 0" }}>
         <Grid.Row>
           <Steps />
         </Grid.Row>
-        {props.currentStep === 0 && <TitleForm />}
-        {props.currentStep === 1 && <DescriptionForm />}
-        {props.currentStep === 2 && <ChoicesForm />}
+        {props.currentStep === 0 && <TitleFormContainer />}
+        {props.currentStep === 1 && <DescriptionFormContainer />}
+        {props.currentStep === 2 && <ChoicesFormContainer />}
       </Segment>
     </Grid>
-  </Fragment>
+    <GlobalStyle />
+  </Responsive>
 );
 
-export default withUpdateStep(CreateCampaign);
+export default withResponsiveWidth(withUpdateStep(CreateCampaign));

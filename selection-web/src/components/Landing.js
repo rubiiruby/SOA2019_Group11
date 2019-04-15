@@ -26,7 +26,7 @@ const Landing = props => (
       </Grid.Row>
       <Grid.Row style={{ padding: "2em" }}>
         <Link to="/create-campaign">
-          <Button color="orange">Start your election</Button>
+          <Button color="blue">Start your election</Button>
         </Link>
       </Grid.Row>
     </Grid>
