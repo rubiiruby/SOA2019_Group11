@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import Index from "./pages/Index";
 import { Route } from "react-router-dom";
 import CreateCampaign from "./pages/CreateCampaign";
+import "semantic-ui-css/semantic.min.css";
 
 const index = () => <Index />;
 const createCampaign = () => <CreateCampaign />;

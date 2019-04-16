@@ -1,7 +1,6 @@
 import React from "react";
 import { Menu, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import "../semantic/dist/semantic.min.css";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 
 const AppBar = props => (
