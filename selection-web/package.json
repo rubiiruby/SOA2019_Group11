@@ -22,7 +22,7 @@
     "uniqid": "^5.0.3"
   },
   "scripts": {
-    "start": "npm run build-semantic && react-scripts start",
+    "start": "react-scripts start",
     "build": "npm run build-semantic && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
