@@ -10,8 +10,7 @@ import ChoicesFormContainer from "../containers/ChoicesFormContainer";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 import OptionForm from "../components/OptionForm";
 
-const GlobalStyle = createGlobalStyle`
-  html  {
+const GlobalStyle = createGlobalStyle` html body {
   height: auto;
   background-color: #fafafa;
   }
