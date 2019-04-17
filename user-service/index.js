@@ -1,8 +1,9 @@
-const express = require("express");
-const app = express();
+const express = require("express")
+const app = express()
+const bodyParser = require('body-parser')
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+app.use(bodyParser.json())
 
-app.listen(5000, () => {});
+app.use('/user', require('./routes/auth'));
+
+app.listen(5000, () => {})
