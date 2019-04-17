@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "gulp": "^3.9.1",
+    "jest": "^24.7.1",
     "lodash": "^4.17.11",
     "node": "^10.1.0",
     "react": "^16.8.5",
@@ -24,7 +25,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run build-semantic && react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
     "eject": "react-scripts eject",
     "build-semantic": "cd src/semantic && gulp build-css build-assets",
     "watch-semantic": "cd src/semantic && yarn run build-semantic && gulp watch"
@@ -37,5 +39,14 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>src/setupTests.js"
+    ]
+  }
 }
