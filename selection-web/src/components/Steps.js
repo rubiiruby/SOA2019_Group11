@@ -49,7 +49,7 @@ const Steps = props => {
         <Step
           style={styles.step}
           onClick={() => props.onUpdateStep(2)}
-          active={props.step === 2 && props.currentStep === 2}
+          active={props.step >= 2 && props.currentStep === 2}
           disabled={props.step <= 1}
         >
           <Step.Content>

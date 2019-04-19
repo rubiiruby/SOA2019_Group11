@@ -10,12 +10,12 @@ const ChoicesForm = props => (
       header="Add your election choices"
       description="Add your choices"
     />
-    <Item.Group>
+    <Item.Group style={{ margin: "1em 0" }}>
       {props.choices.map((choice, index) => (
         <Choice key={choice.id} choice={choice} index={index} {...props} />
       ))}
     </Item.Group>
-    <Grid.Row style={{ padding: "1em 0" }}>
+    <Grid.Row>
       <Button fluid basic onClick={() => props.onAddChoice()}>
         <Icon style={{ fontSize: "1.25em" }} name="add circle" size="large" />
       </Button>

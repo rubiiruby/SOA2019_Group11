@@ -11,5 +11,7 @@ export default combineReducers({
   previewImage: createImageWithNamedType("PREVIEW"),
   createCampaignTitle: createStringwithNamedType("CREATE_TITLE"),
   createCampaignDes: createStringwithNamedType("CREATE_DESCRIPTION"),
-  createCampaignChoices: createChoicesWithNamedType("CREATE_CHOICES")
+  createCampaignChoices: createChoicesWithNamedType("CREATE_CHOICES"),
+  startDate: createStringwithNamedType("START_DATE"),
+  endDate: createStringwithNamedType("END_DATE")
 });

@@ -13,7 +13,13 @@ const Choice = props => {
         name="cancel"
         style={{ margin: "0 0 0.5em 95%" }}
       />
-      <Item style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
+      <Item
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap"
+        }}
+      >
         <span
           style={{
             margin: "1em auto",
