@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
+import LoginModal from "./LoginModal"
 
 const AppBar = props => (
   <Menu
@@ -23,14 +24,7 @@ const AppBar = props => (
       position="right"
       style={{ padding: props.mobile ? "0em 1em" : "1em 0em" }}
     >
-      <Button
-        inverted
-        basic
-        borderless={props.mobile.toString()}
-        style={{ marginLeft: "0.5em" }}
-      >
-        Sign In
-      </Button>
+    <LoginModal/>
     </Menu.Item>
   </Menu>
 );

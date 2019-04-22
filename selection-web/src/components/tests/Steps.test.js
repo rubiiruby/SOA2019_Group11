@@ -4,6 +4,6 @@ import Steps from "../Steps";
 import "../../setupTests";
 
 it("should render without throwing an error", () => {
-  const component = shallow(<Steps />);
+  const component = render(<Steps step = {0} currentstep = {0} />);
   expect(component.find("Step"));
 });
