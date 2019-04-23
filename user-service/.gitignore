@@ -3,3 +3,6 @@
 
 /config
 .vscode/settings.json
+
+# credentials
+/credentials/

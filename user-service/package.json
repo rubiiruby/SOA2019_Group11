@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "auth0-js": "^9.10.2",
     "express": "^4.16.4",
     "firebase": "^5.9.4",
     "jsonwebtoken": "^8.5.1"
