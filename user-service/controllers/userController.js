@@ -8,6 +8,7 @@ routes.get("/", (req, res) => {
 
 //Route to Sign up
 routes.post("/signup", userService.signup)
+
 //Route to Sign in
 routes.post("/signin", userService.signin)
 
