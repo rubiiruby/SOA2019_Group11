@@ -1,8 +1,9 @@
 package com.selection.campaign.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.selection.campaign.data.CampaignResult;
+import com.selection.campaign.data.VoteResult;
 import com.selection.campaign.model.Campaign;
-import com.selection.campaign.model.CampaignResult;
-import com.selection.campaign.model.VoteResult;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import java.util.ArrayList;
-import java.util.HashMap;
 
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -21,6 +21,23 @@ class CampaignControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate = new TestRestTemplate();
+
+    @Test
+    void createCampaign() {
+        ResponseEntity<Campaign> campaign  = restTemplate.getForEntity("/campaign", Campaign.class);
+    }
+
+    @Test
+    void getCampaigns() {
+        ResponseEntity<ArrayList> response = restTemplate.getForEntity("/campaigns", ArrayList.class);
+        assertNotNull(response);
+    }
+
+    @Test
+    void vote() {
+        VoteResult response = restTemplate.postForObject("/campaign/1", null, VoteResult.class);
+        assertEquals("prayuth", response.getVote());
+    }
 
     @Test
     void getCampaignResult() {
@@ -35,29 +52,11 @@ class CampaignControllerTest {
         assertEquals("Thailand Election", campaign.getName());
     }
 
-    @Test
-    void getCampaigns() {
-        ResponseEntity<ArrayList> response = restTemplate.getForEntity("/campaigns", ArrayList.class);
-        assertNotNull(response);
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
-    @Test
-    void postCampaign() {
-        ResponseEntity<HashMap> response = restTemplate.postForEntity("/campaign", null, HashMap.class);
-        assertEquals("success", response.getBody().get("result"));
-    }
-
-
-    @Test
-    void vote() {
-        VoteResult response = restTemplate.postForObject("/campaign/1", null, VoteResult.class);
-        assertEquals("prayuth", response.getVote());
-    }
-
-//    @Test
-//    void getAllCampaign() {
-//        Campaign campaigns = restTemplate.getForObject("/campaigns", Campaign.class);
-//        assertEquals("mr.prayuth", campaigns.getName());
-//    }
-
 }

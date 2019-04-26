@@ -4,6 +4,7 @@ import com.selection.campaign.data.CampaignResult;
 import com.selection.campaign.data.VoteRequest;
 import com.selection.campaign.data.VoteResult;
 import com.selection.campaign.model.Campaign;
+import com.selection.campaign.repository.CampaignRepository;
 import com.selection.campaign.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ public class CampaignController {
     @Autowired
     private CampaignService campaignService;
 
+    @Autowired
+    private CampaignRepository campaignRepository;
+
     /**
      *
      * @return all campaign
@@ -24,7 +28,7 @@ public class CampaignController {
      */
     @GetMapping("/campaigns")
     public ArrayList getCampaigns() {
-        return campaignService.getAllCampaigns();
+        return campaignRepository.findAll();
     }
 
     /**
