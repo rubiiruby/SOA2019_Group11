@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import CreateCampaignDescription from "./CreateCampaignDescription";
 import { Grid, Button, Icon, Item } from "semantic-ui-react";
 import withUpdateStep from "../containers/withUpdateStep";
-import Choice from "./Choice";
+import CreateChoice from "./CreateChoice";
 
 const ChoicesForm = props => (
   <Fragment>
@@ -12,7 +12,12 @@ const ChoicesForm = props => (
     />
     <Item.Group style={{ margin: "1em 0" }}>
       {props.choices.map((choice, index) => (
-        <Choice key={choice.id} choice={choice} index={index} {...props} />
+        <CreateChoice
+          key={choice.id}
+          choice={choice}
+          index={index}
+          {...props}
+        />
       ))}
     </Item.Group>
     <Grid.Row>

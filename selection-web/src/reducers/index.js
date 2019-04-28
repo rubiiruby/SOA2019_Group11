@@ -13,5 +13,6 @@ export default combineReducers({
   createCampaignDes: createStringwithNamedType("CREATE_DESCRIPTION"),
   createCampaignChoices: createChoicesWithNamedType("CREATE_CHOICES"),
   startDate: createStringwithNamedType("START_DATE"),
-  endDate: createStringwithNamedType("END_DATE")
+  endDate: createStringwithNamedType("END_DATE"),
+  selectedChoice: createValueWithNamedType("SELECTED_CHOICE")
 });

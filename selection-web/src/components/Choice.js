@@ -1,99 +1,62 @@
 import React, { Fragment } from "react";
-import { Icon, Input, Segment, Item, Form, Image } from "semantic-ui-react";
-import withUpdateStep from "../containers/withUpdateStep";
-import Dropzone from "react-dropzone";
+import { Divider, Checkbox, Item, Grid } from "semantic-ui-react";
+import withResponsiveWidth from "../containers/withResponsiveWidth";
 
-const Choice = props => {
-  const { choice, index } = props;
-  return (
-    <Segment>
-      <Icon
-        link
-        onClick={() => props.onRemoveChoice(index)}
-        name="cancel"
-        style={{ margin: "0 0 0.5em 95%" }}
-      />
-      <Item
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexWrap: "wrap"
-        }}
-      >
-        <span
+const Choice = props => (
+  <Fragment>
+    <Grid>
+      <Grid.Row style={{ flexWrap: "nowrap" }}>
+        <Grid.Column
+          stretched
+          width="2"
+          verticalAlign="middle"
           style={{
-            margin: "1em auto",
-            paddingRight: "1em",
-            display: "table"
+            alignItems: "center"
           }}
         >
-          {Object.getOwnPropertyNames(choice.image).length === 0 ? (
-            <Dropzone
-              onDrop={accepted => {
-                props.onUploadImage(index, accepted);
-              }}
-              accept="image/*"
-            >
-              {({ getRootProps, getInputProps }) => (
-                <Fragment>
-                  <Icon
-                    size="massive"
-                    name="file image outline"
-                    fitted
-                    link
-                    {...getRootProps()}
-                  />
-                  <input {...getInputProps()} />
-                </Fragment>
-              )}
-            </Dropzone>
-          ) : (
-            <Icon.Group size="big">
-              <Image alt="preview" src={choice.image.preview} size="small" />
-              <Icon
-                onClick={() => props.onRemoveImage(index)}
-                link
-                corner="top right"
-                name="close"
-              />
-            </Icon.Group>
-          )}
-        </span>
-        <Item.Content style={{ flexGrow: 2 }}>
-          <Item.Header>
-            <Form>
-              <Form.Field
-                inline
-                style={{
-                  display: "flex",
-                  alignItems: "baseline"
-                }}
-              >
-                <Input
-                  style={{ width: "100%" }}
-                  placeholder={`#${index + 1} Choice Title`}
-                  defaultValue={choice.title}
-                  onChange={event => {
-                    props.onChangeTitle(index, event.target.value);
-                  }}
+          <Checkbox
+            radio
+            fitted
+            style={{ transform: "scale(1.5)", position: "relative" }}
+            name="choice"
+            value={props.value}
+            checked={props.choice === props.value}
+            onChange={(e, { value }) => props.onUpdateChoice(value)}
+          />
+        </Grid.Column>
+        <Grid.Column width="14" style={{ padding: 0 }}>
+          <Item>
+            <Grid>
+              <Grid.Column width={props.mobile ? 16 : 3}>
+                <Item.Image
+                  size="small"
+                  src="https://react.semantic-ui.com/images/wireframe/image.png"
                 />
-              </Form.Field>
-              <Form.TextArea
-                defaultValue={choice.description}
-                onChange={event => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  props.onChangeDescription(index, event.target.value);
-                }}
-                placeholder="Description"
-                rows={3}
-              />
-            </Form>
-          </Item.Header>
-        </Item.Content>
-      </Item>
-    </Segment>
-  );
-};
+              </Grid.Column>
 
-export default withUpdateStep(Choice);
+              <Grid.Column width={props.mobile ? 16 : 13}>
+                <Item.Content>
+                  <Item.Header as="h2">ผู้สมัครหมายเลขหนึ่ง</Item.Header>
+                  <Item.Description>
+                    มัลติเพล็กซ์อุลตร้าภูเก็ตสุโขทัย โพรโทคอลธันวาคม
+                    มหาสารคามกลศาสตร์โอริยา คลอไรด์โน้ตบุ๊ค วิศิษฐ์มาลีเบญกาย
+                    ศรีสะเกษโคตรบองชาติพันธุ์วิทยา หวั่นกลัวอัตคัตแอร์ทับซ้อน
+                    มัลติเพล็กซ์อุลตร้าภูเก็ตสุโขทัย โพรโทคอลธันวาคม
+                    มหาสารคามกลศาสตร์โอริยา คลอไรด์โน้ตบุ๊ค วิศิษฐ์มาลีเบญกาย
+                    ศรีสะเกษโคตรบองชาติพันธุ์วิทยา หวั่นกลัวอัตคัตแอร์ทับซ้อน
+                    มัลติเพล็กซ์อุลตร้าภูเก็ตสุโขทัย โพรโทคอลธันวาคม
+                    มหาสารคามกลศาสตร์โอริยา คลอไรด์โน้ตบุ๊ค วิศิษฐ์มาลีเบญกาย
+                    ศรีสะเกษโคตรบองชาติพันธุ์วิทยา หวั่นกลัวอัตคัตแอร์ทับซ้อน
+                  </Item.Description>
+                </Item.Content>
+              </Grid.Column>
+            </Grid>
+          </Item>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
+    <Divider />
+  </Fragment>
+);
+
+export default withResponsiveWidth(Choice);

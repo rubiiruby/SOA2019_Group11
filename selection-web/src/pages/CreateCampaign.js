@@ -22,11 +22,7 @@ const GlobalStyle = createGlobalStyle` html body {
 
 const CreateCampaign = props => (
   <Responsive fireOnMount onUpdate={props.updateEvent}>
-    {!props.mobile && (
-      <Segment>
-        <AppBar />
-      </Segment>
-    )}
+    {!props.mobile && <AppBar />}
 
     <Grid centered style={{ padding: "0 2em" }}>
       <Segment textAlign="left" style={{ margin: "4em 0 4em 0" }}>

@@ -9,6 +9,7 @@ const withResponsiveWidth = WrappedComponent => props => {
     <WrappedComponent
       mobile={props.width < Responsive.onlyMobile.maxWidth ? true : false}
       tablet={props.width < Responsive.onlyTablet.maxWidth ? true : false}
+      computer={props.width < Responsive.onlyComputer.maxWidth ? true : false}
       updateEvent={props.onUpdateWidth}
       {...props}
     />

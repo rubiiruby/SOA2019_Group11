@@ -1,3 +1,7 @@
+import axios from "axios";
+
+const api = "https://soa-project-selection-234112.appspot.com/";
+
 export const updateValue = (type, value) => ({
   type: `UPDATE_VALUE_${type}`,
   value
@@ -27,3 +31,17 @@ export const updateChoice = (type, index, choice) => ({
   index,
   choice
 });
+export const fetchStart = type => ({
+  type: `FETCHING_${type}`
+});
+export const fetchSuccess = (type, response) => ({
+  type: `FETCH_SUCCESS_${type}`,
+  response
+});
+export const fetchFailure = (type, response) => ({
+  type: `FETCH_FAILURE_${type}`,
+  response
+});
+export const createCampaign = async campaign => dispatch => {
+  dispatch(fetchStart("CREATE_CAMPAIGN"));
+};

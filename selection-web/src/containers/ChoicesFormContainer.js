@@ -1,5 +1,5 @@
 import React from "react";
-import ChoicesForm from "../components/ChoicesForm";
+import CreateChoicesForm from "../components/ChoicesForm";
 import { connect } from "react-redux";
 import { addChoice, removeChoice, updateChoice } from "../actions";
 import uniqueid from "uniqid";
@@ -28,7 +28,7 @@ const ChoicesFormContainer = props => {
     props.onUpdateChoice(index, choice);
   };
   return (
-    <ChoicesForm
+    <CreateChoicesForm
       {...props}
       onChangeTitle={onChangeTitle}
       onChangeDescription={onChangeDescription}
