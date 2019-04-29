@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = "https://soa-project-selection-234112.appspot.com/";
+const userService = "http://localhost:5000/user/";
 
 export const updateValue = (type, value) => ({
   type: `UPDATE_VALUE_${type}`,
@@ -42,6 +42,24 @@ export const fetchFailure = (type, response) => ({
   type: `FETCH_FAILURE_${type}`,
   response
 });
-export const createCampaign = async campaign => dispatch => {
+export const signin = (username, password) => async dispatch => {
+  dispatch(fetchStart("SIGNIN"));
+  const response = await axios.post(`${userService}signin`, {
+    username,
+    password
+  });
+  console.log(response);
+  if (response.status === 200) {
+    dispatch(fetchSuccess("SIGNIN", response));
+    dispatch(updateString("AUTHORIZED", "SIGNIN"));
+    console.log("signin success");
+  } else {
+    dispatch(fetchFailure("SIGNIN", response));
+    console.log("signin fail");
+  }
+};
+export const signout = () => dispatch =>
+  dispatch(updateString("AUTHORIZED", "SIGNOUT"));
+export const createCampaign = campaign => async dispatch => {
   dispatch(fetchStart("CREATE_CAMPAIGN"));
 };

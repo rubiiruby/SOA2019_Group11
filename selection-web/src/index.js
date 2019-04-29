@@ -9,14 +9,28 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers";
 import { BrowserRouter } from "react-router-dom";
 import style from "./index.css";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { PersistGate } from "redux-persist/integration/react";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const persistConfig = {
+  key: "root",
+  storage
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(persistedReducer, applyMiddleware(thunk));
+
+const persistor = persistStore(store);
 
 const AppWithStore = () => (
   <Provider store={store}>
-    <BrowserRouter>
-      <App className={style.body} />
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <App className={style.body} />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 );
 

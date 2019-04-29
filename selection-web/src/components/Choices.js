@@ -11,7 +11,7 @@ const Choices = props => (
         <Choice value={2} {...props} />
       </Item.Group>
       <Button fluid color="blue" size="large">
-        Submit
+        VOTE
       </Button>
     </Form>
   </Segment>

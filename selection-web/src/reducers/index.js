@@ -3,6 +3,8 @@ import createValueWithNamedType from "./value";
 import createImageWithNamedType from "./images";
 import createStringwithNamedType from "./string";
 import createChoicesWithNamedType from "./choices";
+import createFetchWithNamedType from "./fetch";
+import createStringWithNamedType from "./string";
 
 export default combineReducers({
   width: createValueWithNamedType("WIDTH"),
@@ -14,5 +16,7 @@ export default combineReducers({
   createCampaignChoices: createChoicesWithNamedType("CREATE_CHOICES"),
   startDate: createStringwithNamedType("START_DATE"),
   endDate: createStringwithNamedType("END_DATE"),
-  selectedChoice: createValueWithNamedType("SELECTED_CHOICE")
+  selectedChoice: createValueWithNamedType("SELECTED_CHOICE"),
+  signinFetch: createFetchWithNamedType("SIGNIN"),
+  authorized: createStringWithNamedType("AUTHORIZED")
 });

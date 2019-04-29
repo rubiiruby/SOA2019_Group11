@@ -15,6 +15,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "semantic-ui-calendar-react": "^0.14.4",
     "semantic-ui-css": "^2.4.1",
@@ -25,7 +26,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run build-semantic && react-scripts build",
+    "build": "react-scripts build",
     "test": "jest",
     "test-coverage": "jest --coverage",
     "eject": "react-scripts eject",
