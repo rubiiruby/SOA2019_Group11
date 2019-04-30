@@ -57,7 +57,7 @@ module.exports = {
         res.status(200).json({
           Authorization: "Bearer " + jwtResult
         });
-        console.log("signin");
+        console.log(`${Date.now()} signin`);
       })
       .catch(error => {
         const errorCode = error.code;

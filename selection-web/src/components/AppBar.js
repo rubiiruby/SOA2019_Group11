@@ -37,7 +37,12 @@ const AppBar = props => {
         {props.authorized === "SIGNIN" && (
           <Dropdown pointing="top right" trigger={<span>Suppasek</span>}>
             <Dropdown.Menu>
-              <Dropdown.Item text="My Campaign" icon="newspaper" />
+              <Dropdown.Item>
+                <Link to="/user/campaign" style={{ textDecoration: "none" }}>
+                  <span style={{ color: "black" }}>My Campaign</span>
+                </Link>
+              </Dropdown.Item>
+
               <Dropdown.Item
                 text="Sign Out"
                 icon="sign-out"

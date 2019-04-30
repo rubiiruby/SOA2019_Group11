@@ -18,5 +18,6 @@ export default combineReducers({
   endDate: createStringwithNamedType("END_DATE"),
   selectedChoice: createValueWithNamedType("SELECTED_CHOICE"),
   signinFetch: createFetchWithNamedType("SIGNIN"),
-  authorized: createStringWithNamedType("AUTHORIZED")
+  authorized: createStringWithNamedType("AUTHORIZED"),
+  createCampaignFetch: createFetchWithNamedType("CREATE_CAMPAIGN")
 });

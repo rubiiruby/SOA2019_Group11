@@ -10,7 +10,12 @@ const Choices = props => (
         <Choice value={1} {...props} />
         <Choice value={2} {...props} />
       </Item.Group>
-      <Button fluid color="blue" size="large">
+      <Button
+        onClick={() => props.setModal(true)}
+        fluid
+        color="green"
+        size="large"
+      >
         VOTE
       </Button>
     </Form>

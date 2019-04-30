@@ -7,11 +7,7 @@ const OptionFormContainer = props => <OptionForm {...props} />;
 
 const mapStateToProps = state => ({
   startDate: state.startDate,
-  endDate: state.endDate,
-  title: state.createCampaignTitle,
-  description: state.createCampaignDes,
-  choices: state.createCampaignChoices,
-  images: state.previewImage
+  endDate: state.endDate
 });
 
 const mapDispatchToProps = dispatch => ({

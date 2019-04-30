@@ -21,6 +21,7 @@ const SigninModal = props => (
     onClose={() => props.setModal(false)}
     open={props.modal}
   >
+    <Modal.Header>Welcome Back</Modal.Header>
     <Modal.Content>
       <Form>
         <Form.Field>

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const userService = "http://localhost:5000/user/";
+const campaignService = "http://localhost:8080/";
 
 export const updateValue = (type, value) => ({
   type: `UPDATE_VALUE_${type}`,
@@ -44,17 +45,18 @@ export const fetchFailure = (type, response) => ({
 });
 export const signin = (username, password) => async dispatch => {
   dispatch(fetchStart("SIGNIN"));
-  const response = await axios.post(`${userService}signin`, {
-    username,
-    password
-  });
-  console.log(response);
-  if (response.status === 200) {
+  try {
+    const response = await axios.post(`${userService}signin`, {
+      username,
+      password
+    });
+    console.log(response);
     dispatch(fetchSuccess("SIGNIN", response));
     dispatch(updateString("AUTHORIZED", "SIGNIN"));
     console.log("signin success");
-  } else {
-    dispatch(fetchFailure("SIGNIN", response));
+  } catch (error) {
+    dispatch(fetchFailure("SIGNIN", error));
+    console.log(error);
     console.log("signin fail");
   }
 };
@@ -62,4 +64,13 @@ export const signout = () => dispatch =>
   dispatch(updateString("AUTHORIZED", "SIGNOUT"));
 export const createCampaign = campaign => async dispatch => {
   dispatch(fetchStart("CREATE_CAMPAIGN"));
+  console.log(campaign);
+  try {
+    const response = await axios.post(`${campaignService}campaign`, campaign);
+    console.log("create success");
+    dispatch(fetchSuccess("CREATE_CAMPAIGN", response));
+  } catch (error) {
+    console.log("create fail");
+    dispatch(fetchFailure("CREATE_CAMPAIGN", error));
+  }
 };

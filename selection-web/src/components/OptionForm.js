@@ -50,6 +50,7 @@ const OptionForm = props => {
               startDate,
               endDate
             });
+            props.setModal(true);
           }}
         >
           Submit
