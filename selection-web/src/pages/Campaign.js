@@ -15,26 +15,31 @@ const imageStyle = {
   display: "inline-block"
 };
 
-const HeaderSection = () => (
-  <div style={{ display: "inline-block" }}>
-    <Header
-      style={{ fontFamily: "arial, helvetica", fontSize: "3em" }}
-      as="h1"
-      textAlign="left"
-    >
-      การเลือกตั้งสมาชิกสภาผู้แทนราษฎร
-      <Header.Subheader>
-        <Label color="blue" style={{ margin: "0.5em 0 0 0" }}>
-          Suppasek Manmunkij
-          <Label.Detail>Creator</Label.Detail>
-        </Label>
-      </Header.Subheader>
-    </Header>
-  </div>
-);
+
 
 const Campaign = props => {
   const [modal, setModal] = useState(false);
+  const HeaderSection = () => (
+    <div style={{ display: "inline-block" }}>
+      <Header
+        style={{ fontFamily: "arial, helvetica", fontSize: "3em" }}
+        as="h1"
+        textAlign="left"
+      >
+        การเลือกตั้งสมาชิกสภาผู้แทนราษฎร
+        <Header.Subheader>
+          <Label color="blue" style={{ margin: "0.5em 0 0 0" }}>
+            Suppasek Manmunkij
+            <Label.Detail>Creator</Label.Detail>
+          </Label>
+          <Label color="red" style={props.width < 405 ? { margin: "0.5em 0 0 0" } : {margin: "0.5em 0 0 0.5em"}}>
+            30 June 2019
+            <Label.Detail>Expire Date</Label.Detail>
+          </Label>
+        </Header.Subheader>
+      </Header>
+    </div>
+  );
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
       <AppBar />
