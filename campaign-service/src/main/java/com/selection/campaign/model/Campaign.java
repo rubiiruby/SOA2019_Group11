@@ -16,24 +16,19 @@ public class Campaign {
     private String image;
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private List<Candidate> candidates = new ArrayList<Candidate>();
+    private List<String> voter;
 
     public Campaign() {
 
     }
 
-    public Campaign(String name, String detail, String expiredDate, String image) {
-        this.name = name;
-        this.detail = detail;
-        this.expiredDate = expiredDate;
-        this.image = image;
-    }
-
-    public Campaign(String name, String detail, String expiredDate, String image, List<Candidate> candidates) {
+    public Campaign(String name, String detail, String expiredDate, String image, List<Candidate> candidates, List<String> voter) {
         this.name = name;
         this.detail = detail;
         this.expiredDate = expiredDate;
         this.image = image;
         this.candidates = candidates;
+        this.voter = voter;
     }
 
     public long getId() {
@@ -89,5 +84,13 @@ public class Campaign {
     public Campaign addCandidate(Candidate candidate) {
         this.candidates.add(candidate.setCampaign(this));
         return this;
+    }
+
+    public List<String> getVoter() {
+        return voter;
+    }
+
+    public void setVoter(List<String> voter) {
+        this.voter = voter;
     }
 }
