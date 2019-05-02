@@ -6,12 +6,10 @@ import OptionForm from "../components/OptionForm";
 const OptionFormContainer = props => <OptionForm {...props} />;
 
 const mapStateToProps = state => ({
-  startDate: state.startDate,
   endDate: state.endDate
 });
 
 const mapDispatchToProps = dispatch => ({
-  onUpdateStart: startDate => dispatch(updateString("START_DATE", startDate)),
   onUpdateEnd: endDate => dispatch(updateString("END_DATE", endDate))
 });
 

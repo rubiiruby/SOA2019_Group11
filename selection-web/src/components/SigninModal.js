@@ -2,7 +2,15 @@ import React from "react";
 import { Button, Modal, Form } from "semantic-ui-react";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+toast.configure();
+const notify = () =>
+  toast.error("Incorrect username or password", {
+    position: toast.POSITION.BOTTOM_LEFT,
+    hideProgressBar: true
+  });
 const SigninModal = props => (
   <Modal
     style={{ width: !props.mobile && "420px", padding: "1em" }}
@@ -54,6 +62,8 @@ const SigninModal = props => (
         </Button>
       </Form>
     </Modal.Content>
+    {console.log(props.status.status)}
+    {props.status.status === "fail" ? notify() : ""}
   </Modal>
 );
 

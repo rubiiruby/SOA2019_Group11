@@ -19,17 +19,6 @@ const OptionForm = props => {
           clearable
           clearIcon={<Icon name="remove" color="red" />}
           size="large"
-          placeholder="Start date and time"
-          iconPosition="left"
-          value={props.startDate}
-          onChange={(event, { value }) => props.onUpdateStart(value)}
-        />
-
-        <DateTimeInput
-          style={styles.item}
-          clearable
-          clearIcon={<Icon name="remove" color="red" />}
-          size="large"
           placeholder="End date and time"
           iconPosition="left"
           value={props.endDate}

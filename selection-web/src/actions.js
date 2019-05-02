@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const userService = "http://localhost:5000/user/";
-const campaignService = "http://localhost:8080/";
+const userService = "http://192.168.1.34:5000/user/";
+const campaignService = "https://soa-project-selection-234112.appspot.com/";
 
 export const updateValue = (type, value) => ({
   type: `UPDATE_VALUE_${type}`,
@@ -35,6 +35,9 @@ export const updateChoice = (type, index, choice) => ({
 export const fetchStart = type => ({
   type: `FETCHING_${type}`
 });
+export const fetchIdle = type => ({
+  type: `FETCH_IDLE_${type}`
+});
 export const fetchSuccess = (type, response) => ({
   type: `FETCH_SUCCESS_${type}`,
   response
@@ -56,6 +59,7 @@ export const signin = (username, password) => async dispatch => {
     console.log("signin success");
   } catch (error) {
     dispatch(fetchFailure("SIGNIN", error));
+    dispatch(fetchIdle("SIGNIN"));
     console.log(error);
     console.log("signin fail");
   }
@@ -72,5 +76,31 @@ export const createCampaign = campaign => async dispatch => {
   } catch (error) {
     console.log("create fail");
     dispatch(fetchFailure("CREATE_CAMPAIGN", error));
+  }
+};
+export const register = user => async dispatch => {
+  dispatch(fetchStart("REGISTER"));
+  console.log(user);
+  try {
+    const response = await axios.post(`${userService}signup`, user);
+    console.log("register success");
+    dispatch(fetchSuccess("REGISTER", response));
+  } catch (error) {
+    console.log("register fail");
+    dispatch(fetchFailure("REGISTER", error));
+  }
+};
+export const vote = choice => async dispatch => {
+  dispatch(fetchStart("VOTE"));
+  try {
+    const response = await axios.post(
+      `${campaignService}campaign/${choice.id}`,
+      { choice }
+    );
+    dispatch(fetchSuccess("VOTE"), response);
+    console.log("vote success");
+  } catch (error) {
+    dispatch(fetchFailure("VOTE"), error);
+    console.log("vote failure");
   }
 };

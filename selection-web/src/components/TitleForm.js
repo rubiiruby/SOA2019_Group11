@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
-import { Grid, Input, Button } from "semantic-ui-react";
-import withUpdateStep from "../containers/withUpdateStep";
+import { Grid, Input, Button, Message } from "semantic-ui-react";
 import CreateCampaignDescription from "./CreateCampaignDescription";
 
 const TitleForm = props => (
@@ -10,6 +9,9 @@ const TitleForm = props => (
       description="Brief your title short and clear, Focus on your election purpose"
     />
     <Grid.Row style={{ padding: "1em 0" }}>
+      {props.titleError && (
+        <Message error content="Please enter your campaign title" />
+      )}
       <Input
         onChange={event => props.onUpdateTitle(event.target.value)}
         placeholder="Title"
@@ -18,11 +20,11 @@ const TitleForm = props => (
       />
     </Grid.Row>
     <Grid.Row>
-      <Button onClick={() => props.onUpdateStep(1)} basic floated="right">
+      <Button onClick={() => props.onClickNext()} basic floated="right">
         Next
       </Button>
     </Grid.Row>
   </Fragment>
 );
 
-export default withUpdateStep(TitleForm);
+export default TitleForm;

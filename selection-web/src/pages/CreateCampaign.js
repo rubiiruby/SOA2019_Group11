@@ -29,7 +29,6 @@ const CreateCampaign = props => {
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
       {!props.mobile && <AppBar />}
-
       <Grid centered style={{ padding: "0 2em" }}>
         <Segment textAlign="left" style={{ margin: "4em 0 4em 0" }}>
           <Grid.Row>
@@ -56,7 +55,6 @@ const CreateCampaign = props => {
         }
         {...{ modal, setModal }}
       />
-
       <GlobalStyle />
     </Responsive>
   );

@@ -7,6 +7,8 @@ export default function createFetchWithNamedType(statusName) {
         return { loading: false, status: "fail" };
       case `FETCHING_${statusName}`:
         return { status: "idle", loading: true };
+      case `FETCH_IDLE_${statusName}`:
+        return { status: IDBCursorWithValue, loading: false };
       default:
         return result;
     }
