@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Header, Segment, Grid, Button } from "semantic-ui-react";
+import { Container, Header, Segment, Grid, Button, Image } from "semantic-ui-react";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
+import landing from "../static/landing.png"
 
 const Landing = props => (
-  <Container fluid style={{ padding: props.mobile ? "4em 2em" : "6em 10.5em" }}>
+  <Container fluid style={{ padding: props.mobile ? "0em 2em" : "0em 10.5em" }}>
     <Grid textAlign="center">
       <Grid.Row>
         <Segment basic style={{ padding: 0, margin: 0 }} textAlign="center">
+        <Image style={{display:'inline-block'}} size='medium' src={landing}/>
           <Header
             as="h1"
             style={{ fontSize: "3.5em", margin: 0, fontWeight: "bold" }}
@@ -30,6 +32,7 @@ const Landing = props => (
         </Link>
       </Grid.Row>
     </Grid>
+    
   </Container>
 );
 
