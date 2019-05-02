@@ -5,19 +5,24 @@ const jwtService = require("./jwtService")
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 
+const db = firebase.firestore()
+
 module.exports = {
   signup: (req, res) => {
-    let firstname = req.body.firstname
-    let lastname = req.body.lastname
-    let email = req.body.email
-    let password = req.body.password
-    let phoneNo = req.body.phoneNo
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const email = req.body.email
+    const password = req.body.password
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
+        firebase.auth().currentUser.updateProfile({
+          displayName: `${firstName} ${lastName}`
+        })
+
         res.status(201).json({
-          fullname: firstname + " " + lastname,
+          fullname: firstName + " " + lastName,
           email: email
         })
       })
@@ -37,15 +42,7 @@ module.exports = {
     firebase
       .auth()
       .signInWithEmailAndPassword(username, password)
-      .then(() => {
-        // PAYLOAD
-        let payload = {
-          data1: "Data 1",
-          data2: "Data 2",
-          data3: "Data 3",
-          data4: "Data 4"
-        }
-
+      .then((user) => {
         // Signing options
         sOptions = {
           issuer: "Authorizaxtion/Resource/This server",
@@ -53,11 +50,13 @@ module.exports = {
           audience: "Client_Identity" // this should be provided by client
         }
 
-        const jwtResult = jwtService.sign(payload, sOptions)
-        res.status(200).json({
-          Authorization: "Bearer " + jwtResult
-        })
-        console.log(`${Date.now()} signin`)
+        const payload_res = {
+          Authorization: `Bearer ${jwtService.sign(payload, sOptions)}`,
+          fullName: firebase.auth().currentUser.displayName
+        }
+
+        res.status(200).json(payload_res)
+        console.log(`${new Date().toString()} : signin`)
       })
       .catch(error => {
         const errorCode = error.code
