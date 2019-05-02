@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Icon, Input, Segment, Item, Form, Image } from "semantic-ui-react";
 import withUpdateStep from "../containers/withUpdateStep";
 import Dropzone from "react-dropzone";
+import addImage from "../static/addImage.png";
 
 const CreateChoice = props => {
   const { choice, index } = props;
@@ -36,13 +37,7 @@ const CreateChoice = props => {
             >
               {({ getRootProps, getInputProps }) => (
                 <Fragment>
-                  <Icon
-                    size="massive"
-                    name="file image outline"
-                    fitted
-                    link
-                    {...getRootProps()}
-                  />
+                  <Image src={addImage} {...getRootProps()} />
                   <input {...getInputProps()} />
                 </Fragment>
               )}
