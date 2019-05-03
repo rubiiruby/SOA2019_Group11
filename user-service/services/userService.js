@@ -49,7 +49,6 @@ module.exports = {
           fullName: firebase.auth().currentUser.displayName
         }
 
-        console.log(firebase.auth().currentUser)
         // Signing options
         sOptions = {
           issuer: "Authorizaxtion/Resource/This server",
