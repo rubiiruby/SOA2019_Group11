@@ -11,6 +11,7 @@ const notify = () =>
     position: toast.POSITION.BOTTOM_LEFT,
     hideProgressBar: true
   });
+
 const SigninModal = props => (
   <Modal
     style={{ width: !props.mobile && "420px", padding: "1em" }}
@@ -36,7 +37,6 @@ const SigninModal = props => (
           <label>E-mail or Phone number</label>
           <input
             autoComplete="current-password"
-            value={props.username}
             onChange={e => props.setUsername(e.target.value)}
             placeholder="E-mail or Phone number"
           />
@@ -45,7 +45,6 @@ const SigninModal = props => (
           <label>Password</label>
           <input
             autoComplete="current-password"
-            value={props.password}
             onChange={e => props.setPassword(e.target.value)}
             type="password"
             placeholder="Password"

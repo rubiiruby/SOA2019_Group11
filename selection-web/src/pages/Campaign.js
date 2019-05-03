@@ -4,8 +4,10 @@ import AppBar from "../components/AppBar";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 import { Responsive } from "semantic-ui-react";
 import Carousel from "nuka-carousel";
-import ChoicesContainer from "../containers/ChoicesContainer";
+import Choices from "../components/Choices";
 import ConfirmModal from "../components/ConfirmModal";
+import { connect } from "react-redux";
+import { updateValue } from "../actions";
 
 const imageStyle = {
   maxWidth: "100%",
@@ -15,31 +17,26 @@ const imageStyle = {
   display: "inline-block"
 };
 
-
+const HeaderSection = () => (
+  <div style={{ display: "inline-block" }}>
+    <Header
+      style={{ fontFamily: "arial, helvetica", fontSize: "3em" }}
+      as="h1"
+      textAlign="left"
+    >
+      การเลือกตั้งสมาชิกสภาผู้แทนราษฎร
+      <Header.Subheader>
+        <Label color="blue" style={{ margin: "0.5em 0 0 0" }}>
+          Suppasek Manmunkij
+          <Label.Detail>Creator</Label.Detail>
+        </Label>
+      </Header.Subheader>
+    </Header>
+  </div>
+);
 
 const Campaign = props => {
   const [modal, setModal] = useState(false);
-  const HeaderSection = () => (
-    <div style={{ display: "inline-block" }}>
-      <Header
-        style={{ fontFamily: "arial, helvetica", fontSize: "3em" }}
-        as="h1"
-        textAlign="left"
-      >
-        การเลือกตั้งสมาชิกสภาผู้แทนราษฎร
-        <Header.Subheader>
-          <Label color="blue" style={{ margin: "0.5em 0 0 0" }}>
-            Suppasek Manmunkij
-            <Label.Detail>Creator</Label.Detail>
-          </Label>
-          <Label color="red" style={props.width < 405 ? { margin: "0.5em 0 0 0" } : {margin: "0.5em 0 0 0.5em"}}>
-            30 June 2019
-            <Label.Detail>Expire Date</Label.Detail>
-          </Label>
-        </Header.Subheader>
-      </Header>
-    </div>
-  );
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
       <AppBar />
@@ -61,7 +58,6 @@ const Campaign = props => {
           width="80%"
           cellAlign="center"
           heightMode="max"
-          initialSlideHeight="500px"
           style={{
             display: "inline-block"
           }}
@@ -100,7 +96,7 @@ const Campaign = props => {
         </p>
 
         <Divider hidden />
-        <ChoicesContainer setModal={setModal} />
+        <Choices {...props} setModal={setModal} />
         <ConfirmModal
           header="Confirm"
           content="You can't vote again, Are you really sure?"
@@ -114,4 +110,17 @@ const Campaign = props => {
   );
 };
 
-export default withResponsiveWidth(Campaign);
+const mapStateToProps = state => ({
+  choice: state.selectedChoice
+});
+
+const mapDispatchToProps = dispatch => ({
+  onUpdateChoice: value => {
+    dispatch(updateValue("SELECTED_CHOICE", value));
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withResponsiveWidth(Campaign));

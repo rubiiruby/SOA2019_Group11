@@ -1,8 +1,10 @@
 import React from "react";
-import { Modal } from "semantic-ui-react";
+import { Modal, Dimmer, Loader } from "semantic-ui-react";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 
 const ConfirmModal = props => (
+  <Dimmer active={props.loading}>
+    <Loader />
   <Modal
     open={props.modal}
     header={props.header}
@@ -18,6 +20,7 @@ const ConfirmModal = props => (
     ]}
     onClose={() => props.setModal(false)}
   />
+  </Dimmer>
 );
 
 export default withResponsiveWidth(ConfirmModal);

@@ -14,10 +14,10 @@ export default combineReducers({
   createCampaignTitle: createStringwithNamedType("CREATE_TITLE"),
   createCampaignDes: createStringwithNamedType("CREATE_DESCRIPTION"),
   createCampaignChoices: createChoicesWithNamedType("CREATE_CHOICES"),
-  startDate: createStringwithNamedType("START_DATE"),
   endDate: createStringwithNamedType("END_DATE"),
   selectedChoice: createValueWithNamedType("SELECTED_CHOICE"),
   signinFetch: createFetchWithNamedType("SIGNIN"),
   authorized: createStringWithNamedType("AUTHORIZED"),
-  createCampaignFetch: createFetchWithNamedType("CREATE_CAMPAIGN")
+  createCampaignFetch: createFetchWithNamedType("CREATE_CAMPAIGN"),
+  registerFetch: createFetchWithNamedType("REGISTER")
 });

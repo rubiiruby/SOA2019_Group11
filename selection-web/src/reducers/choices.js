@@ -16,6 +16,8 @@ export default function createChoicesWithNamedType(choicesName) {
         choices = choices.slice();
         choices[action.index] = action.choice;
         return choices;
+      case `RESET_${choicesName}`:
+        return [{ title: "", description: "", image: {}, id: "unique" }];
       default:
         return choices;
     }

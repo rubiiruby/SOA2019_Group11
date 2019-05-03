@@ -4,12 +4,15 @@ import AppBar from "../components/AppBar";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 import { connect } from "react-redux";
 import { register } from "../actions";
+import { Redirect } from "react-router";
+import ConfirmModal from "../components/ConfirmModal";
 
 const Register = props => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signupModal, setSignupModal] = useState(false);
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
       <AppBar />
@@ -52,9 +55,7 @@ const Register = props => {
                   />
                 </Form.Field>
                 <Button
-                  onClick={() =>
-                    props.onRegister({ firstName, lastName, email, password })
-                  }
+                  onClick={() => setSignupModal(true)}
                   fluid
                   color="blue"
                   type="submit"
@@ -66,15 +67,30 @@ const Register = props => {
           </Grid.Row>
         </Grid>
       </Segment>
+      {props.fetch.status === "success" && <Redirect to="/" exact push />}
+      <ConfirmModal
+        modal={signupModal}
+        setModal={setSignupModal}
+        header="Confirm"
+        content="Are you really sure?"
+        loading={props.fetch.loading}
+        action={() => {
+          props.onRegister({ firstName, lastName, email, password });
+        }}
+      />
     </Responsive>
   );
 };
+
+const mapStateToProps = state => ({
+  fetch: state.registerFetch
+});
 
 const mapDispatchToProps = dispatch => ({
   onRegister: user => dispatch(register(user))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withResponsiveWidth(Register));
