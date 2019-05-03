@@ -43,6 +43,13 @@ module.exports = {
       .auth()
       .signInWithEmailAndPassword(username, password)
       .then((user) => {
+        // PAYLOAD
+        let payload = {
+          userId: firebase.auth().currentUser.uid,
+          fullName: firebase.auth().currentUser.displayName
+        }
+
+        console.log(firebase.auth().currentUser)
         // Signing options
         sOptions = {
           issuer: "Authorizaxtion/Resource/This server",
@@ -54,7 +61,6 @@ module.exports = {
           Authorization: `Bearer ${jwtService.sign(payload, sOptions)}`,
           fullName: firebase.auth().currentUser.displayName
         }
-
         res.status(200).json(payload_res)
         console.log(`${new Date().toString()} : signin`)
       })
