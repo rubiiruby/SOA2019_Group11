@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, Form } from "semantic-ui-react";
+import { Button, Modal, Form, Message } from "semantic-ui-react";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -50,7 +50,14 @@ const SigninModal = props => (
             type="password"
             placeholder="Password"
           />
+          {props.status.status === "fail" && 
+    (<Message
+      error
+      header='Action Forbidden'
+      content='You can only sign up for an account once with a given e-mail address.'/>)
+      }
         </Form.Field>
+        
         <Link to="/join">Sign up</Link>
         <Button
           onClick={() => props.signin(props.username, props.password)}
@@ -63,7 +70,6 @@ const SigninModal = props => (
       </Form>
     </Modal.Content>
     {console.log(props.status.status)}
-    {props.status.status === "fail" ? notify() : ""}
   </Modal>
 );
 
