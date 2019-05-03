@@ -7,6 +7,8 @@ export default function createValueWithNamedType(valueName) {
         } else {
           return action.value;
         }
+      case `RESET_${valueName}`:
+        return 0;
       default:
         return value;
     }

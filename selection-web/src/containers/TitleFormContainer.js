@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import TitleForm from "../components/TitleForm";
-import { connect } from "react-redux";
-import { updateString } from "../actions";
 import withUpdateStep from "../containers/withUpdateStep";
 
 const TitleFormContainer = props => {
@@ -17,15 +15,4 @@ const TitleFormContainer = props => {
   return <TitleForm {...{ onClickNext, titleError }} {...props} />;
 };
 
-const mapStateToProps = state => ({
-  title: state.createCampaignTitle
-});
-
-const mapDispatchToProps = dispatch => ({
-  onUpdateTitle: title => dispatch(updateString("CREATE_TITLE", title))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withUpdateStep(TitleFormContainer));
+export default withUpdateStep(TitleFormContainer);

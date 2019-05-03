@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const userService = "http://192.168.1.34:5000/user/";
+const userService = "http://localhost:5000/user/";
 const campaignService = "https://soa-project-selection-234112.appspot.com/";
 
+export const reset = type => ({
+  type: `RESET_${type}`
+});
 export const updateValue = (type, value) => ({
   type: `UPDATE_VALUE_${type}`,
   value
@@ -77,6 +80,7 @@ export const createCampaign = campaign => async dispatch => {
     console.log("create fail");
     dispatch(fetchFailure("CREATE_CAMPAIGN", error));
   }
+  dispatch(fetchIdle("CREATE_CAMPAIGN"));
 };
 export const register = user => async dispatch => {
   dispatch(fetchStart("REGISTER"));
@@ -89,6 +93,7 @@ export const register = user => async dispatch => {
     console.log("register fail");
     dispatch(fetchFailure("REGISTER", error));
   }
+  dispatch(fetchIdle("REGISTER"));
 };
 export const vote = choice => async dispatch => {
   dispatch(fetchStart("VOTE"));
@@ -103,4 +108,13 @@ export const vote = choice => async dispatch => {
     dispatch(fetchFailure("VOTE"), error);
     console.log("vote failure");
   }
+};
+export const resetCreate = () => dispatch => {
+  dispatch(reset("STEP"));
+  dispatch(reset("CURRENT_STEP"));
+  dispatch(reset("PREVIEW"));
+  dispatch(reset("CREATE_TITLE"));
+  dispatch(reset("CREATE_DESCRIPTION"));
+  dispatch(reset("CREATE_CHOICES"));
+  dispatch(reset("END_DATE"));
 };

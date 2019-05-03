@@ -37,7 +37,7 @@ const CreateChoice = props => {
             >
               {({ getRootProps, getInputProps }) => (
                 <Fragment>
-                  <Image src={addImage} {...getRootProps()} />
+                  <Image size="small" src={addImage} {...getRootProps()} />
                   <input {...getInputProps()} />
                 </Fragment>
               )}

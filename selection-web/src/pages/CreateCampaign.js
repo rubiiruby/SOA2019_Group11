@@ -4,14 +4,15 @@ import AppBar from "../components/AppBar";
 import Steps from "../components/Steps";
 import withUpdateStep from "../containers/withUpdateStep";
 import TitleFormContainer from "../containers/TitleFormContainer";
-import DescriptionFormContainer from "../containers/DescriptionFormContainer";
+import DescriptionForm from "../components/DescriptionForm";
 import { createGlobalStyle } from "styled-components";
 import ChoicesFormContainer from "../containers/ChoicesFormContainer";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
-import OptionFormContainer from "../containers/OptionFormContainer";
+import OptionForm from "../components/OptionForm";
 import ConfirmModal from "../components/ConfirmModal";
 import { connect } from "react-redux";
-import { createCampaign } from "../actions";
+import { createCampaign, resetCreate, updateString } from "../actions";
+import { Redirect } from "react-router";
 
 const GlobalStyle = createGlobalStyle` 
 html body {
@@ -34,27 +35,34 @@ const CreateCampaign = props => {
           <Grid.Row>
             <Steps />
           </Grid.Row>
-          {props.currentStep === 0 && <TitleFormContainer />}
-          {props.currentStep === 1 && <DescriptionFormContainer />}
+          {props.currentStep === 0 && <TitleFormContainer {...props} />}
+          {props.currentStep === 1 && <DescriptionForm {...props} />}
           {props.currentStep === 2 && <ChoicesFormContainer />}
-          {props.currentStep === 3 && <OptionFormContainer {...{ setModal }} />}
+          {props.currentStep === 3 && (
+            <OptionForm {...{ setModal }} {...props} />
+          )}
         </Segment>
       </Grid>
       <ConfirmModal
         header="Confirm"
         content="Are you really sure?"
-        action={() =>
+        path="/campaign"
+        loading={props.fetch.loading}
+        action={() => {
+          props.reset();
           props.onCreateCampaign({
-            startDate: props.startDate,
             endDate: props.endDate,
             title: props.title,
             description: props.description,
             choices: props.choices,
             images: props.images
-          })
-        }
+          });
+        }}
         {...{ modal, setModal }}
       />
+      {props.fetch.status === "success" && (
+        <Redirect to="/campaign" exact push />
+      )}
       <GlobalStyle />
     </Responsive>
   );
@@ -66,11 +74,17 @@ const mapStateToProps = state => ({
   title: state.createCampaignTitle,
   description: state.createCampaignDes,
   choices: state.createCampaignChoices,
-  images: state.previewImage
+  images: state.previewImage,
+  fetch: state.createCampaignFetch
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCreateCampaign: campaign => dispatch(createCampaign(campaign))
+  onCreateCampaign: campaign => dispatch(createCampaign(campaign)),
+  onUpdateDes: description =>
+    dispatch(updateString("CREATE_DESCRIPTION", description)),
+  onUpdateEnd: endDate => dispatch(updateString("END_DATE", endDate)),
+  onUpdateTitle: title => dispatch(updateString("CREATE_TITLE", title)),
+  reset: () => dispatch(resetCreate())
 });
 
 export default connect(

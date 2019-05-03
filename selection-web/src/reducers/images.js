@@ -9,6 +9,8 @@ export default function createImageWithNamedType(imageName) {
         files = files.slice();
         files.splice(action.index, 1);
         return files;
+      case `RESET_${imageName}`:
+        return [];
       default:
         return files;
     }

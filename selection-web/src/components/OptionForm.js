@@ -6,7 +6,6 @@ import { Grid, Button, Icon } from "semantic-ui-react";
 const styles = { item: { margin: "1em 0 0.25em 0" } };
 
 const OptionForm = props => {
-  const { title, description, choices, startDate, endDate, images } = props;
   return (
     <Fragment>
       <CreateCampaignDescription
@@ -30,17 +29,7 @@ const OptionForm = props => {
           color="blue"
           style={{ margin: "1em 0" }}
           floated="right"
-          onClick={() => {
-            console.log({
-              title,
-              description,
-              choices,
-              images,
-              startDate,
-              endDate
-            });
-            props.setModal(true);
-          }}
+          onClick={() => props.setModal(true)}
         >
           Submit
         </Button>
