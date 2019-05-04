@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form, Segment, Responsive, Grid } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Segment,
+  Responsive,
+  Grid,
+  Message
+} from "semantic-ui-react";
 import AppBar from "../components/AppBar";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 import { connect } from "react-redux";
@@ -13,6 +20,7 @@ const Register = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signupModal, setSignupModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
       <AppBar />
@@ -54,8 +62,26 @@ const Register = props => {
                     onChange={e => setPassword(e.target.value)}
                   />
                 </Form.Field>
+                {errorMessage && (
+                  <Message
+                    style={{ display: "block" }}
+                    error
+                    content="Please complete all fields"
+                  />
+                )}
                 <Button
-                  onClick={() => setSignupModal(true)}
+                  onClick={() => {
+                    if (
+                      firstName === "" ||
+                      lastName === "" ||
+                      email === "" ||
+                      password === ""
+                    ) {
+                      setErrorMessage(true);
+                    } else {
+                      setSignupModal(true);
+                    }
+                  }}
                   fluid
                   color="blue"
                   type="submit"

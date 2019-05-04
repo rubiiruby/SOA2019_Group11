@@ -1,6 +1,6 @@
 export default function createChoicesWithNamedType(choicesName) {
   return function(
-    choices = [{ title: "", description: "", image: {}, id: "unique" }],
+    choices = [{ title: "", detail: "", image: {}, id: "unique" }],
     action
   ) {
     switch (action.type) {
@@ -17,7 +17,7 @@ export default function createChoicesWithNamedType(choicesName) {
         choices[action.index] = action.choice;
         return choices;
       case `RESET_${choicesName}`:
-        return [{ title: "", description: "", image: {}, id: "unique" }];
+        return [{ title: "", detail: "", image: {}, id: "unique" }];
       default:
         return choices;
     }

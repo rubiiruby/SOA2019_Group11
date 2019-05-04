@@ -20,7 +20,7 @@ const App = () => (
     <Route exact path="/" component={index} />
     <Route exact path="/create-campaign" component={createCampaign} />
     <Route exact path="/join" component={register} />
-    <Route exact path="/campaign" component={campaign} />
+    <Route exact path="/campaign/:id" component={campaign} />
     <Route exact path="/campaign/summary" component={summary} />
     <Route exact path="/user/campaign" component={myCampaign} />
   </Fragment>

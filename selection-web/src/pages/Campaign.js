@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Segment, Header, Divider, Label } from "semantic-ui-react";
 import AppBar from "../components/AppBar";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
@@ -7,7 +7,8 @@ import Carousel from "nuka-carousel";
 import Choices from "../components/Choices";
 import ConfirmModal from "../components/ConfirmModal";
 import { connect } from "react-redux";
-import { updateValue } from "../actions";
+import { updateValue, getCampaign, vote } from "../actions";
+import { withRouter } from "react-router-dom";
 
 const imageStyle = {
   maxWidth: "100%",
@@ -17,26 +18,45 @@ const imageStyle = {
   display: "inline-block"
 };
 
-const HeaderSection = () => (
-  <div style={{ display: "inline-block" }}>
-    <Header
-      style={{ fontFamily: "arial, helvetica", fontSize: "3em" }}
-      as="h1"
-      textAlign="left"
-    >
-      การเลือกตั้งสมาชิกสภาผู้แทนราษฎร
-      <Header.Subheader>
-        <Label color="blue" style={{ margin: "0.5em 0 0 0" }}>
-          Suppasek Manmunkij
-          <Label.Detail>Creator</Label.Detail>
-        </Label>
-      </Header.Subheader>
-    </Header>
-  </div>
-);
-
 const Campaign = props => {
   const [modal, setModal] = useState(false);
+  const [campaign, setCampaign] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const campaign = await getCampaign(props.match.params.id);
+      console.log(campaign);
+      setCampaign(campaign);
+    };
+    fetchData();
+  }, []);
+  const HeaderSection = () => (
+    <div style={{ display: "inline-block" }}>
+      <Header
+        style={{ fontFamily: "arial, helvetica", fontSize: "3em" }}
+        as="h1"
+        textAlign="left"
+      >
+        {campaign.name}
+        <Header.Subheader>
+          <Label color="blue" style={{ margin: "0.5em 0 0 0" }}>
+            Suppasek Manmunkij
+            <Label.Detail>Creator</Label.Detail>
+          </Label>
+          <Label
+            color="red"
+            style={
+              props.width < 405
+                ? { margin: "0.5em 0 0 0" }
+                : { margin: "0.5em 0 0 0.5em" }
+            }
+          >
+            {campaign.expiredDate}
+            <Label.Detail>Expire Date</Label.Detail>
+          </Label>
+        </Header.Subheader>
+      </Header>
+    </div>
+  );
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
       <AppBar />
@@ -77,31 +97,23 @@ const Campaign = props => {
         {props.mobile && <HeaderSection />}
         <Divider hidden />
 
-        <p style={{ textAlign: "left" }}>
-          แตงโมเพอร์ออกไซด์หยอยพรีเมียมสเกลาร์
-          สเตชั่นไฟแนนซ์ธัญบุรีออสการ์พุทธคยา ไฮโดรลิกไฮโดรลิกแอนคฑาทะแยง ออโรรา
-          วอชิงตันคาทอลิค ฟอนต์ พิษณุโลกซีเทนบางปะกง สเปกโทรสโคปอะมิโน
-          ปิรามิดออสการ์เน็ตเวิร์กบรัดเลย์ตราด ซิงค์รูปภาพสเปซเม็กซิโก
-          นิสสันอยุธยาทนงอัฟริกาฮุสเซ็น ฃวด หล่ะเตลุคูสเตชั่น
-          สิมิลันปาฏิโมกข์อุทัยธานีปูนแดง กระบี่เดนเวอร์คลื่นเหียน
-          ฮันกึลยากี้ตัดสินนาลันทาสเปกโทรสโคป เพริศแพร้วซิงค์
-          ไฮดรอลิกเจ้าคณะสูญญากาศมะละแหม่งแอคคอร์ด ไพ่ป๊อกเช็กเวิร์คสเตชัน
-          ทิพากร ไมเคิลสารนาถ จำวัดมอนิเตอร์อียิปต์หวั่นกลัวยาฮู นครปฐมจำวัด
-          ลันตาซ่องเสพ ซีเทนโอ่อวดบล็อกเกอร์อิริยาบท
-          หวาดเกรงพฤษภาคมยูนิเซฟนครราชสีมา นาซ่าลำพูนระนองหวาดเกรงมัจจุราช
-          มัลติเซ็กเมนต์เอทานอลหยอมแหยม
-          ยูนิโค้ดโอเปอเรเตอร์หนองบัวลำภูโปรเซสเซอร์ บิสเซา หวั่นกลัว
-          เทสโก้ลัตเวียธัญบุรีคุรุมุขีปัญจาบี ตัดสินเวก้าแอพพลิเคชันพะเยาทรมาณ
-          สุริยจักรวาล จาเมกา
-        </p>
+        <p style={{ textAlign: "left" }}>{campaign.detail}</p>
 
         <Divider hidden />
-        <Choices {...props} setModal={setModal} />
+        <Choices {...props} choices={campaign.candidates} setModal={setModal} />
         <ConfirmModal
           header="Confirm"
           content="You can't vote again, Are you really sure?"
           modal={modal}
           setModal={setModal}
+          action={() => {
+            console.log(
+              `vote campaign ${campaign.id} choice ${
+                campaign.candidates[props.choice].id
+              }`
+            );
+            props.vote(campaign.id, campaign.candidates[props.choice].id);
+          }}
         />
       </Segment>
 
@@ -115,12 +127,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onUpdateChoice: value => {
-    dispatch(updateValue("SELECTED_CHOICE", value));
-  }
+  onUpdateChoice: value => dispatch(updateValue("SELECTED_CHOICE", value)),
+  vote: (campaignId, choiceId) => dispatch(vote(campaignId, choiceId))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withResponsiveWidth(Campaign));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withResponsiveWidth(Campaign))
+);

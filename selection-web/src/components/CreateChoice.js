@@ -74,7 +74,7 @@ const CreateChoice = props => {
                 />
               </Form.Field>
               <Form.TextArea
-                defaultValue={choice.description}
+                defaultValue={choice.detail}
                 onChange={event => {
                   event.preventDefault();
                   event.stopPropagation();
