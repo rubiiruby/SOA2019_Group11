@@ -1,5 +1,7 @@
 package com.selection.campaign.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,24 +13,27 @@ public class Campaign {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    @Type(type = "text")
     private String detail;
     private String expiredDate;
-    private String image;
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+    private List<CampaignImage> image = new ArrayList<CampaignImage>();
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private List<Candidate> candidates = new ArrayList<Candidate>();
-    private List<String> voter;
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+    private List<Voter> voters = new ArrayList<Voter>();
 
     public Campaign() {
 
     }
 
-    public Campaign(String name, String detail, String expiredDate, String image, List<Candidate> candidates, List<String> voter) {
+    public Campaign(String name, String detail, String expiredDate, List<CampaignImage> image, List<Candidate> candidates, List<Voter> voters) {
         this.name = name;
         this.detail = detail;
         this.expiredDate = expiredDate;
         this.image = image;
         this.candidates = candidates;
-        this.voter = voter;
+        this.voters = voters;
     }
 
     public long getId() {
@@ -63,12 +68,13 @@ public class Campaign {
         this.expiredDate = expiredDate;
     }
 
-    public String getImage() {
+    public List<CampaignImage> getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(List<CampaignImage> image) {
         this.image = image;
+        this.image.forEach(x -> x.setCampaign(this));
     }
 
     public List<Candidate> getCandidates() {
@@ -86,11 +92,12 @@ public class Campaign {
         return this;
     }
 
-    public List<String> getVoter() {
-        return voter;
+    public List<Voter> getVoters() {
+        return voters;
     }
 
-    public void setVoter(List<String> voter) {
-        this.voter = voter;
+    public void setVoters(List<Voter> voters) {
+        this.voters = voters;
+        this.voters.forEach(x -> x.setCampaign(this));
     }
 }
