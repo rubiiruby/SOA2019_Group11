@@ -19,5 +19,6 @@ export default combineReducers({
   signinFetch: createFetchWithNamedType("SIGNIN"),
   authorized: createStringWithNamedType("AUTHORIZED"),
   createCampaignFetch: createFetchWithNamedType("CREATE_CAMPAIGN"),
-  registerFetch: createFetchWithNamedType("REGISTER")
+  registerFetch: createFetchWithNamedType("REGISTER"),
+  username: createStringWithNamedType("USERNAME")
 });

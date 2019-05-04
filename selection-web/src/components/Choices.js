@@ -5,11 +5,13 @@ import Choice from "../components/Choice";
 const Choices = props => (
   <Segment style={{ margin: "0.5em" }}>
     <Form style={{ textAlign: "left" }}>
-      <Item.Group unstackable divided>
-        <Choice value={0} {...props} />
-        <Choice value={1} {...props} />
-        <Choice value={2} {...props} />
-      </Item.Group>
+      {props.choices && (
+        <Item.Group unstackable divided>
+          {props.choices.map((choice, index) => (
+            <Choice {...choice} value={index} {...props} />
+          ))}
+        </Item.Group>
+      )}
       <Button
         onClick={() => props.setModal(true)}
         fluid
@@ -21,5 +23,9 @@ const Choices = props => (
     </Form>
   </Segment>
 );
+
+Choice.defaultProps = {
+  choices: []
+};
 
 export default Choices;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, Dropdown } from "semantic-ui-react";
+import { Menu, Dropdown, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 import SigninContainer from "../containers/SigninContainer";
@@ -16,7 +16,8 @@ const AppBar = props => {
       style={{
         padding: props.mobile ? "1em 1em" : "0em 10em",
         boxShadow: "none",
-        borderRadius: "0px"
+        borderRadius: "0px",
+        display: props.display
       }}
       fluid
       attached="top"
@@ -30,12 +31,28 @@ const AppBar = props => {
         position="right"
         style={{ padding: props.mobile ? "0em 1em" : "1em 0em" }}
       >
-        {console.log(props.authorized)}
         {props.authorized !== "SIGNIN" && (
-          <SigninContainer {...{ modal, setModal }} />
+          <SigninContainer
+            header="Welcome Back"
+            trigger={
+              <Button
+                inverted
+                basic
+                borderless={props.mobile.toString()}
+                style={{ marginLeft: "0.5em" }}
+                onClick={() => setModal(true)}
+              >
+                Sign in
+              </Button>
+            }
+            {...{ modal, setModal }}
+          />
         )}
         {props.authorized === "SIGNIN" && (
-          <Dropdown pointing="top right" trigger={<span>Suppasek</span>}>
+          <Dropdown
+            pointing="top right"
+            trigger={<span>{props.username}</span>}
+          >
             <Dropdown.Menu>
               <Dropdown.Item>
                 <Link to="/user/campaign" style={{ textDecoration: "none" }}>
@@ -57,7 +74,8 @@ const AppBar = props => {
 };
 
 const mapStateToProps = state => ({
-  authorized: state.authorized
+  authorized: state.authorized,
+  username: state.username
 });
 
 const mapDispatchToProps = dispatch => ({

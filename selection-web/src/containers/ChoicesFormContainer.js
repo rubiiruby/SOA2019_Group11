@@ -10,9 +10,9 @@ const ChoicesFormContainer = props => {
     choice.title = title;
     props.onUpdateChoice(index, choice);
   };
-  const onChangeDescription = (index, description) => {
+  const onChangeDescription = (index, detail) => {
     var choice = props.choices[index];
-    choice.description = description;
+    choice.detail = detail;
     props.onUpdateChoice(index, choice);
   };
   const onUploadImage = (index, image) => {
@@ -47,7 +47,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(
       addChoice("CREATE_CHOICES", {
         title: "",
-        description: "",
+        detail: "",
         image: {},
         id: uniqueid()
       })

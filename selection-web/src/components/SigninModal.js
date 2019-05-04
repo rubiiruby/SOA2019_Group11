@@ -1,75 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Message } from "semantic-ui-react";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-toast.configure();
-const notify = () =>
-  toast.error("Incorrect username or password", {
-    position: toast.POSITION.BOTTOM_LEFT,
-    hideProgressBar: true
-  });
-
-const SigninModal = props => (
-  <Modal
-    style={{ width: !props.mobile && "420px", padding: "1em" }}
-    size="small"
-    trigger={
-      <Button
-        inverted
-        basic
-        borderless={props.mobile.toString()}
-        style={{ marginLeft: "0.5em" }}
-        onClick={() => props.setModal(true)}
-      >
-        Sign in
-      </Button>
+const SigninModal = props => {
+  const [signinError, setSigninError] = useState(false);
+  useEffect(() => {
+    if (props.status.status === "fail") {
+      setSigninError(true);
     }
-    onClose={() => props.setModal(false)}
-    open={props.modal}
-  >
-    <Modal.Header>Welcome Back</Modal.Header>
-    <Modal.Content>
-      <Form>
-        <Form.Field>
-          <label>E-mail or Phone number</label>
-          <input
-            autoComplete="current-password"
-            onChange={e => props.setUsername(e.target.value)}
-            placeholder="E-mail or Phone number"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <input
-            autoComplete="current-password"
-            onChange={e => props.setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-          />
-          {props.status.status === "fail" && 
-    (<Message
-      error
-      header='Action Forbidden'
-      content='You can only sign up for an account once with a given e-mail address.'/>)
-      }
-        </Form.Field>
-        
-        <Link to="/join">Sign up</Link>
-        <Button
-          onClick={() => props.signin(props.username, props.password)}
-          color="blue"
-          floated="right"
-          loading={props.status.loading}
-        >
-          Sign in
-        </Button>
-      </Form>
-    </Modal.Content>
-    {console.log(props.status.status)}
-  </Modal>
-);
+  });
+  return (
+    <Modal
+      style={{ width: !props.mobile && "420px", padding: "1em" }}
+      size="small"
+      trigger={props.trigger}
+      onClose={() => {
+        props.setModal(false);
+        setSigninError(false);
+      }}
+      open={props.modal}
+    >
+      <Modal.Header>{props.header}</Modal.Header>
+      <Modal.Content>
+        <Form>
+          <Form.Field error={signinError}>
+            <label>E-mail or Phone number</label>
+            <input
+              autoComplete="current-password"
+              onChange={e => props.setUsername(e.target.value)}
+              placeholder="E-mail or Phone number"
+            />
+          </Form.Field>
+          <Form.Field error={signinError}>
+            <label>Password</label>
+            <input
+              autoComplete="current-password"
+              onChange={e => props.setPassword(e.target.value)}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Field>
+          {signinError && (
+            <Message
+              style={{ display: "block" }}
+              error
+              content="Please enter correct email or password"
+            />
+          )}
+          <Link to="/join">Sign up</Link>
+          <Button
+            onClick={() => props.signin(props.username, props.password)}
+            color="blue"
+            floated="right"
+            loading={props.status.loading}
+          >
+            Sign in
+          </Button>
+        </Form>
+      </Modal.Content>
+    </Modal>
+  );
+};
 
 export default withResponsiveWidth(SigninModal);

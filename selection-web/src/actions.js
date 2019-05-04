@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const userService = "http://localhost:5000/user/";
-const campaignService = "https://soa-project-selection-234112.appspot.com/";
+const campaignService = "http://192.168.1.52:8080/";
 
 export const reset = type => ({
   type: `RESET_${type}`
@@ -59,11 +59,12 @@ export const signin = (username, password) => async dispatch => {
     console.log(response);
     dispatch(fetchSuccess("SIGNIN", response));
     dispatch(updateString("AUTHORIZED", "SIGNIN"));
+    dispatch(updateString("USERNAME", response.data.fullName));
     console.log("signin success");
   } catch (error) {
+    console.log(error);
     dispatch(fetchFailure("SIGNIN", error));
     dispatch(fetchIdle("SIGNIN"));
-    console.log(error);
     console.log("signin fail");
   }
 };
@@ -73,9 +74,13 @@ export const createCampaign = campaign => async dispatch => {
   dispatch(fetchStart("CREATE_CAMPAIGN"));
   console.log(campaign);
   try {
+    var bodyFormData = new FormData();
+    bodyFormData.set("images", campaign.images);
     const response = await axios.post(`${campaignService}campaign`, campaign);
     console.log("create success");
+    console.log(response);
     dispatch(fetchSuccess("CREATE_CAMPAIGN", response));
+    //dispatch(resetCreate());
   } catch (error) {
     console.log("create fail");
     dispatch(fetchFailure("CREATE_CAMPAIGN", error));
@@ -95,15 +100,15 @@ export const register = user => async dispatch => {
   }
   dispatch(fetchIdle("REGISTER"));
 };
-export const vote = choice => async dispatch => {
+export const vote = (campaignId, choiceId) => async dispatch => {
   dispatch(fetchStart("VOTE"));
   try {
     const response = await axios.post(
-      `${campaignService}campaign/${choice.id}`,
-      { choice }
+      `${campaignService}campaign/${campaignId}/vote`,
+      { candidate: choiceId }
     );
     dispatch(fetchSuccess("VOTE"), response);
-    console.log("vote success");
+    console.log(response);
   } catch (error) {
     dispatch(fetchFailure("VOTE"), error);
     console.log("vote failure");
@@ -117,4 +122,9 @@ export const resetCreate = () => dispatch => {
   dispatch(reset("CREATE_DESCRIPTION"));
   dispatch(reset("CREATE_CHOICES"));
   dispatch(reset("END_DATE"));
+};
+export const getCampaign = async id => {
+  let response = await axios.get(`${campaignService}campaign/${id}`);
+  console.log(response);
+  return response.data;
 };

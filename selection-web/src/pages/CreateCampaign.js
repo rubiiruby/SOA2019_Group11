@@ -13,6 +13,7 @@ import ConfirmModal from "../components/ConfirmModal";
 import { connect } from "react-redux";
 import { createCampaign, resetCreate, updateString } from "../actions";
 import { Redirect } from "react-router";
+import SigninContainer from "../containers/SigninContainer";
 
 const GlobalStyle = createGlobalStyle` 
 html body {
@@ -27,9 +28,10 @@ html body {
 
 const CreateCampaign = props => {
   const [modal, setModal] = useState(false);
+  const [signinModal, setSigninModal] = useState(false);
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
-      {!props.mobile && <AppBar />}
+      <AppBar display={props.mobile ? "none" : "flex"} />
       <Grid centered style={{ padding: "0 2em" }}>
         <Segment textAlign="left" style={{ margin: "4em 0 4em 0" }}>
           <Grid.Row>
@@ -39,7 +41,7 @@ const CreateCampaign = props => {
           {props.currentStep === 1 && <DescriptionForm {...props} />}
           {props.currentStep === 2 && <ChoicesFormContainer />}
           {props.currentStep === 3 && (
-            <OptionForm {...{ setModal }} {...props} />
+            <OptionForm {...{ setModal, setSigninModal }} {...props} />
           )}
         </Segment>
       </Grid>
@@ -49,33 +51,41 @@ const CreateCampaign = props => {
         path="/campaign"
         loading={props.fetch.loading}
         action={() => {
-          props.reset();
+          const choices = props.choices;
+          choices.forEach(function(choice) {
+            delete choice.id;
+          });
           props.onCreateCampaign({
-            endDate: props.endDate,
-            title: props.title,
-            description: props.description,
-            choices: props.choices,
+            expiredDate: props.endDate,
+            name: props.title,
+            detail: props.description,
+            candidates: choices,
             images: props.images
           });
         }}
         {...{ modal, setModal }}
       />
       {props.fetch.status === "success" && (
-        <Redirect to="/campaign" exact push />
+        <Redirect to={`campaign/${props.fetch.response.data.id}`} exact push />
       )}
+      <SigninContainer
+        header="Please sign in or join us"
+        setModal={setSigninModal}
+        modal={signinModal}
+      />
       <GlobalStyle />
     </Responsive>
   );
 };
 
 const mapStateToProps = state => ({
-  startDate: state.startDate,
   endDate: state.endDate,
   title: state.createCampaignTitle,
   description: state.createCampaignDes,
   choices: state.createCampaignChoices,
   images: state.previewImage,
-  fetch: state.createCampaignFetch
+  fetch: state.createCampaignFetch,
+  authorized: state.authorized
 });
 
 const mapDispatchToProps = dispatch => ({

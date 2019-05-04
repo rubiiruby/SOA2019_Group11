@@ -29,7 +29,13 @@ const OptionForm = props => {
           color="blue"
           style={{ margin: "1em 0" }}
           floated="right"
-          onClick={() => props.setModal(true)}
+          onClick={() => {
+            if (props.authorized === "SIGNIN") {
+              props.setModal(true);
+            } else {
+              props.setSigninModal(true);
+            }
+          }}
         >
           Submit
         </Button>
