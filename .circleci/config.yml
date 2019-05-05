@@ -31,13 +31,13 @@ jobs:
                 
 workflows:
   version: 2
-    deploy:
-      jobs:
-        - user-service
-          filters:
-            branches:
-              only:
-                - master
+  deploy:
+    jobs:
+      - user-service
+        filters:
+          branches:
+            only:
+              - master
         # - service-deploy:
         #     requires:
         #       - user-service
