@@ -1,0 +1,14 @@
+version: "3.5"
+services:
+  selection-web:
+    image: suppasek/selection-web
+    container_name: selection-web
+    build:
+      context: selection-web
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/usr/src/app"
+      - "/usr/src/app/node_modules"
+    restart: on-failure
+    ports:
+      - "3000:3000"

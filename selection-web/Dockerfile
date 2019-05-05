@@ -13,5 +13,7 @@ COPY package.json /usr/src/app/package.json
 RUN npm install
 RUN npm install react-scripts -g
 
+EXPOSE 3000
+
 # start app
 CMD ["npm", "start"]
