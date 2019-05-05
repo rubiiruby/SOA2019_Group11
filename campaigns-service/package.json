@@ -1,0 +1,16 @@
+{
+  "name": "campaign-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "campaignApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eureka-js-client": "^4.4.2",
+    "express": "^4.16.4",
+    "sequelize": "^5.8.5"
+  }
+}
