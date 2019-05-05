@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha"
+    "test": "mocha --exit",
+    "coverage": "nyc npm run test"
   },
   "keywords": [
     "gcloud",
@@ -15,9 +16,15 @@
   "license": "ISC",
   "dependencies": {
     "auth0-js": "^9.10.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "firebase": "^5.9.4",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "nyc": "^14.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4"
   }
 }
