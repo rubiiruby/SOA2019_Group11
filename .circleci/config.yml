@@ -6,7 +6,7 @@ jobs:
       working_directory: ~/SOA2019_Group11/selection-web/
       steps:
       - checkout:
-          path: ~/SOA2019_Group6/selection-web/
+          path: ~/SOA2019_Group11/selection-web/
       - restore_cache:
           keys:
             - 'v1-dependencies-{{ checksum "package.json" }}'
