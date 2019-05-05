@@ -1,7 +1,7 @@
 version: 2
 jobs:
     user-service: 
-      working_directory: ~/SOA2019_Group11/user_service 
+      working_directory: ~/SOA2019_Group11/user-service 
       docker:
         - image: google/cloud-sdk
       steps:
@@ -18,8 +18,8 @@ jobs:
         - run:
             name: 'Build Project'
             command: |
-              docker build -t gcr.io/$PROJECT_ID/user-service .
-              docker push gcr.io/$PROJECT_ID/user-service
+              docker build -t gcr.io/$PROJECT_ID/user_service:${CIRCLE_SHA1} .
+              docker push gcr.io/$PROJECT_ID/user_service:${CIRCLE_SHA1}
     # server-deploy:
     #   machine:
     #     enabled: true
