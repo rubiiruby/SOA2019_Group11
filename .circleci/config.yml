@@ -2,7 +2,7 @@ version: 2
 jobs:
     selection-web: 
       docker:
-        - image: 'circleci/node:11'
+        - image: 'circleci/node:10.1.0'
       working_directory: ~/SOA2019_Group11/selection-web/
       steps:
       - checkout:
