@@ -34,10 +34,10 @@ workflows:
   deploy:
     jobs:
       - user-service
-        filters:
-          branches:
-            only:
-              - master
+          filters:
+           branches:
+             only:
+                - master
         # - service-deploy:
         #     requires:
         #       - user-service
