@@ -5,7 +5,6 @@ version: 2
       docker:
         - image: 'circleci/node:11'
       steps:
-        - checkout
         - restore_cache:
           keys:
             - 'v1-dependencies-{{ checksum "package.json" }}'
