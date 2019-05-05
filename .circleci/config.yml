@@ -1,11 +1,12 @@
 version: 2
 jobs:
     selection-web: 
-      working_directory: ~/SOA2019_Group11/selection-web/
       docker:
         - image: 'circleci/node:11'
+      working_directory: ~/SOA2019_Group11/selection-web/
       steps:
-      - checkout
+      - checkout:
+          path: ~/SOA2019_Group6/selection-web/
       - restore_cache:
           keys:
             - 'v1-dependencies-{{ checksum "package.json" }}'
