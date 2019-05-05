@@ -14,7 +14,8 @@ jobs:
             command: |
               echo $PASS > gcloud-service-key.json
               gcloud auth activate-service-account ${ACCOUNT_ID} --key-file gcloud-service-key.json
-              gcloud config set project $PROJECT_ID
+              gcloud --quiet config set project $PROJECT_ID
+              gcloud auth configure-docker
         - run:
             name: 'Build Project'
             command: |
