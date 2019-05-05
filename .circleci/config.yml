@@ -18,8 +18,8 @@ jobs:
         - run:
             name: 'Build Project'
             command: |
-              docker build -t gcr.io/${PROJECT_ID}/${REG_ID}:$CIRCLE_SHA1 .
-              gcloud docker -- push gcr.io/${PROJECT_ID}/${REG_ID}:$CIRCLE_SHA1
+              docker build -t gcr.io${GCLOUD_PROJECT_ID}/user_service:${CIRCLE_SHA1} .
+              docker push gcr.io${GCLOUD_PROJECT_ID}/user-service:${CIRCLE_SHA1}
     # server-deploy:
     #   machine:
     #     enabled: true
