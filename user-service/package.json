@@ -14,5 +14,8 @@
     "express": "^4.16.4",
     "firebase": "^5.9.4",
     "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4"
   }
 }

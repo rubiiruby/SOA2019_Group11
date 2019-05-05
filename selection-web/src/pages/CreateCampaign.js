@@ -29,6 +29,7 @@ html body {
 const CreateCampaign = props => {
   const [modal, setModal] = useState(false);
   const [signinModal, setSigninModal] = useState(false);
+
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
       <AppBar display={props.mobile ? "none" : "flex"} />
