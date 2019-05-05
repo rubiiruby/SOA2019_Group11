@@ -3,7 +3,7 @@ jobs:
     user-service: 
       working_directory: ~/SOA2019_Group11/user_service 
       docker:
-        - image: 'circleci/node:10.1.0'
+        - image: google/cloud-sdk
       steps:
         - setup_remote_docker:
                 docker_layer_caching: true
