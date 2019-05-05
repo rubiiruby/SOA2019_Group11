@@ -7,8 +7,8 @@ import withUpdateStep from "../containers/withUpdateStep";
 const DescriptionForm = props => (
   <Fragment>
     <CreateCampaignDescription
-      header="Explain your election information"
-      description="Add image, Explain the purpose of election"
+      header="Explain your campaign information"
+      description="Add image, Explain the purpose of campaign"
     />
     <Grid.Row style={{ padding: 0 }}>
       <ImagesFormContainer />

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const userService = "http://localhost:5000/user/";
-const campaignService = "http://192.168.1.52:8080/";
+const campaignService = "http://localhost:8080/";
 
 export const reset = type => ({
   type: `RESET_${type}`
@@ -60,6 +60,11 @@ export const signin = (username, password) => async dispatch => {
     dispatch(fetchSuccess("SIGNIN", response));
     dispatch(updateString("AUTHORIZED", "SIGNIN"));
     dispatch(updateString("USERNAME", response.data.fullName));
+    dispatch(updateString("TOKEN", response.data.Authorization));
+    axios.defaults.headers = {
+      Authorization: response.data.Authorization
+    };
+
     console.log("signin success");
   } catch (error) {
     console.log(error);
@@ -68,18 +73,34 @@ export const signin = (username, password) => async dispatch => {
     console.log("signin fail");
   }
 };
-export const signout = () => dispatch =>
+export const signout = () => dispatch => {
   dispatch(updateString("AUTHORIZED", "SIGNOUT"));
+  dispatch(updateString("TOKEN", ""));
+};
 export const createCampaign = campaign => async dispatch => {
   dispatch(fetchStart("CREATE_CAMPAIGN"));
   console.log(campaign);
   try {
     var bodyFormData = new FormData();
-    bodyFormData.set("images", campaign.images);
+    for (const file of campaign.images) {
+      bodyFormData.append("images", file);
+    }
     const response = await axios.post(`${campaignService}campaign`, campaign);
     console.log("create success");
     console.log(response);
-    dispatch(fetchSuccess("CREATE_CAMPAIGN", response));
+    const uploadImage = await axios.post(
+      `${campaignService}campaign/${response.data.id}/images`,
+      bodyFormData,
+      {
+        headers: {
+          "content-type": "multipart/form-data"
+        }
+      }
+    );
+    console.log(uploadImage);
+    const mergeResponse = { ...response, ...uploadImage };
+    console.log(mergeResponse);
+    dispatch(fetchSuccess("CREATE_CAMPAIGN", mergeResponse));
     //dispatch(resetCreate());
   } catch (error) {
     console.log("create fail");

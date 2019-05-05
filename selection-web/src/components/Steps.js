@@ -27,7 +27,7 @@ const Steps = props => {
           <Step.Content>
             <Step.Title>Title</Step.Title>
             {!props.mobile && (
-              <Step.Description>Write your election title</Step.Description>
+              <Step.Description>Write your campaign title</Step.Description>
             )}
           </Step.Content>
         </Step>
@@ -41,7 +41,7 @@ const Steps = props => {
             <Step.Title>Description </Step.Title>
             {!props.mobile && (
               <Step.Description>
-                Explain your election information
+                Explain your campaign information
               </Step.Description>
             )}
           </Step.Content>
@@ -55,7 +55,7 @@ const Steps = props => {
           <Step.Content>
             <Step.Title>Choices</Step.Title>
             {!props.mobile && (
-              <Step.Description>Add your election choices</Step.Description>
+              <Step.Description>Add your campaign choices</Step.Description>
             )}
           </Step.Content>
         </Step>

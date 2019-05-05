@@ -8,7 +8,7 @@ import Choices from "../components/Choices";
 import ConfirmModal from "../components/ConfirmModal";
 import { connect } from "react-redux";
 import { updateValue, getCampaign, vote } from "../actions";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 const imageStyle = {
   maxWidth: "100%",
@@ -20,14 +20,21 @@ const imageStyle = {
 
 const Campaign = props => {
   const [modal, setModal] = useState(false);
-  const [campaign, setCampaign] = useState([]);
+  const [campaign, setCampaign] = useState({ image: [] });
   useEffect(() => {
     const fetchData = async () => {
       const campaign = await getCampaign(props.match.params.id);
       console.log(campaign);
-      setCampaign(campaign);
+      if (campaign) {
+        setCampaign(campaign);
+      } else {
+        props.history.push("/404");
+      }
     };
     fetchData();
+    setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 0);
   }, []);
   const HeaderSection = () => (
     <div style={{ display: "inline-block" }}>
@@ -82,16 +89,9 @@ const Campaign = props => {
             display: "inline-block"
           }}
         >
-          <img
-            style={imageStyle}
-            src="https://dummyimage.com/400x600/000/fff.png"
-          />
-          <span>
-            <img
-              style={imageStyle}
-              src="https://dummyimage.com/600x400/0011ff/000.png&text=TEST"
-            />
-          </span>
+          {campaign.image.map(image => (
+            <img style={imageStyle} src={image.imageURL} />
+          ))}
         </Carousel>
         <Divider hidden />
         {props.mobile && <HeaderSection />}

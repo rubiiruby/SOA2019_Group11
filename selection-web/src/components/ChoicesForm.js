@@ -9,7 +9,7 @@ const ChoicesForm = props => {
   return (
     <Fragment>
       <CreateCampaignDescription
-        header="Add your election choices"
+        header="Add your campaign choices"
         description="Add your choices"
       />
       {choicesError && (

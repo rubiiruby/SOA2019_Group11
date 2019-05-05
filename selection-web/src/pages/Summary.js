@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import AppBar from "../components/AppBar";
 import withResponsiveWidth from "../containers/withResponsiveWidth";
+import Campaign from "./Campaign";
 
 const Summary = props => (
   <Responsive fireOnMount onUpdate={props.updateEvent}>
@@ -27,39 +28,25 @@ const Summary = props => (
       </div>
       <Segment>
         <Item.Group divided>
-          <Item>
-            <Item.Image
-              size="small"
-              src="https://react.semantic-ui.com/images/wireframe/image.png"
-            />
+          {props.campaign &&
+            props.campaign.map(campaign => (
+              <Item>
+                <Item.Image
+                  size="small"
+                  src="https://react.semantic-ui.com/images/wireframe/image.png"
+                />
 
-            <Item.Content>
-              <Item.Header as="a">Cute Dog</Item.Header>
-              <Item.Extra>
-                <Icon color="green" name="check" /> 121 Votes
-              </Item.Extra>
-            </Item.Content>
-          </Item>
-
-          <Item>
-            <Item.Image
-              size="small"
-              src="https://react.semantic-ui.com/images/wireframe/image.png"
-            />
-
-            <Item.Content>
-              <Item.Header as="a">Cute Dog</Item.Header>
-              <Item.Extra content="121 Votes" />
-            </Item.Content>
-          </Item>
-
-          <Item>
-            <Item.Image
-              size="small"
-              src="https://react.semantic-ui.com/images/wireframe/image.png"
-            />
-            <Item.Content header="Cute Dog" extra="121 Votes" />
-          </Item>
+                <Item.Content>
+                  <Item.Header as="a">
+                    {campaign.candidateScore.name}
+                  </Item.Header>
+                  <Item.Extra>
+                    <Icon color="green" name="check" />
+                    {campaign.candidateScore.voteResult}
+                  </Item.Extra>
+                </Item.Content>
+              </Item>
+            ))}
         </Item.Group>
       </Segment>
     </Segment>

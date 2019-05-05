@@ -5,8 +5,8 @@ import CreateCampaignDescription from "./CreateCampaignDescription";
 const TitleForm = props => (
   <Fragment>
     <CreateCampaignDescription
-      header="Write your election title"
-      description="Brief your title short and clear, Focus on your election purpose"
+      header="Write your campaign title"
+      description="Brief your title short and clear, Focus on your campaign purpose"
     />
     <Grid.Row style={{ padding: "1em 0" }}>
       {props.titleError && (

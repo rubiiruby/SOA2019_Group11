@@ -9,8 +9,8 @@ const OptionForm = props => {
   return (
     <Fragment>
       <CreateCampaignDescription
-        header="Set your election date and time"
-        description="Set your election start and end date"
+        header="Set your campaign option"
+        description="Set your campaign expired date and time"
       />
       <div>
         <DateTimeInput
