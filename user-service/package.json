@@ -2,10 +2,15 @@
   "name": "user-service",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "mocha"
   },
+  "keywords": [
+    "gcloud",
+    "node"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -14,8 +19,5 @@
     "express": "^4.16.4",
     "firebase": "^5.9.4",
     "jsonwebtoken": "^8.5.1"
-  },
-  "devDependencies": {
-    "mocha": "^6.1.4"
   }
 }

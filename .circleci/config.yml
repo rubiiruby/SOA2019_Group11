@@ -1,21 +1,75 @@
+# version: 2
+# jobs:
+#     selection-web: 
+#       docker:
+#         - image: 'circleci/node:10.1.0'
+#       working_directory: ~/SOA2019_Group11/selection-web/
+#       steps:
+#       - checkout:
+#           path: ~/SOA2019_Group11
+#       - run: 'yarn install'
+#       - run:
+#           name: 'Build Project'
+#           command: 'yarn build'
+#       - run:
+#           name: 'Deploy to Firebase Hosting'
+#           command: './node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN'
+# workflows:
+#   version: 2
+#   build-test-and-deploy:
+#     jobs:
+#       - selection-web
 version: 2
 jobs:
-    selection-web: 
-      docker:
-        - image: 'circleci/node:10.1.0'
-      working_directory: ~/SOA2019_Group11/selection-web/
-      steps:
-      - checkout:
-          path: ~/SOA2019_Group11
-      - run: 'yarn install'
+  build:
+    docker:
+      - image: gcr.io/soa-project-selection-234112/user_service 
+    working_directory: ~/SOA2019_Group11/user-service
+    environment:
+      DEPLOYMENT_NAME: user-service
+      PROJECT_ID: soa-project-selection-234112
+      CLUSTER_NAME: soa-selection-cluster
+      CLUSTER_NAME_STAG: soa-selection-stag
+      CLOUDSDK_COMPUTE_ZONE: us-west1-b 
+      CONTAINER_NAME: user-service
+      IMAGE: user-service
+      REG_ID: user-service
+      REG_ID_PROD: user-service-prod
+      IMG_TAG: 1.0
+      PROJECT_NAME: user-service
+      DEPLOYMENT_ENVIRONMENT: staging
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
       - run:
-          name: 'Build Project'
-          command: 'yarn build'
+          name: Install node packages
+          command: |
+            npm install
+      
       - run:
-          name: 'Deploy to Firebase Hosting'
-          command: './node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN'
-workflows:
-  version: 2
-  build-test-and-deploy:
-    jobs:
-      - selection-web
+          name: Start server
+          command: |
+            node server &
+      - run:
+          name: Run tests
+          command: |
+            npm test
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      
+      - run:
+          name: Build and Deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              ./deployment.sh
+            fi  

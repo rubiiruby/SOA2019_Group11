@@ -35,6 +35,7 @@ module.exports = {
           err: errorMessage
         })
       })
+      
   },
   signin: (req, res) => {
     let username = req.body.username
@@ -71,5 +72,8 @@ module.exports = {
           err: errorMessage
         })
       })
-  }
+  },
+  wait: (req, res) => {
+    
+  } 
 }
