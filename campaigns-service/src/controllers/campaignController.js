@@ -49,6 +49,7 @@ routes.post("/", [
   check('candidates', 'Invalid candidates').exists(),
 ], async (req, res) => {
   let count = 1
+  req.body.userId = req.user.jti
   const campaign = await models.Campaign.create(req.body)
   await req.body.candidates.forEach(async candidate => {
     candidate.campaignId = campaign.dataValues.id
@@ -117,7 +118,7 @@ routes.put("/:campaignId/candidate/:candidateId", multer.single('image'), (req, 
 // Route to vote campaign
 routes.post("/:campaignId/vote", async (req, res) => {
   const voter = await models.Voter.create({
-    userId: 1,
+    userId: req.user.jti,
     campaignId: req.params.campaignId
   })
   const candidate = await models.Candidate.update({
@@ -146,30 +147,14 @@ routes.get("/:campaignId/result", async (req, res) => {
 
 // Route to get history vote
 routes.get("/history/vote", async (req, res) => {
-  const voted = await models.Voter.findAll({ where: { userId: 1 } })
+  const voted = await models.Voter.findAll({ where: { userId: req.user.jti } })
   res.json(voted)
 })
 
 // Route to get hisotry create
 routes.get("/history/create", async (req, res) => {
-  const voted = await models.Campaign.findAll({ where: { userId: 1 } })
+  const voted = await models.Campaign.findAll({ where: { userId: req.user.jti } })
   res.json(voted)
-})
-
-routes.get("/test/sync", async (req, res) => {
-  await models.User.sync()
-  await models.Campaign.sync()
-  await models.CampaignImage.sync()
-  await models.Candidate.sync()
-  await models.Voter.sync()
-  res.send("ok")
-})
-
-routes.get("/test/t",
-jwt({ secret: "abcdefgggg" }), async (req, res) => {
-  console.log(jwtService.sign({test: "aaaa"}))
-  console.log(req.user)
-  res.send("ok")
 })
 
 export default routes
