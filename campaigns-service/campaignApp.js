@@ -1,5 +1,8 @@
-const app = require('./app')
-const Eureka = require('eureka-js-client').Eureka;
+import app from './app'
+import Eureka from 'eureka-js-client'
+import config from './src/config/env'
+
+const { node_port } = config
 
 // example configuration
 const client = new Eureka({
@@ -25,10 +28,21 @@ const client = new Eureka({
     },
 })
 
+// client.logger.level('debug');
 client.start((error) => {
     console.log(error || 'complete');
 })
-process.on('exit', () => { client.stop()})
-process.on('SIGINT', () => { client.stop()})
+process.on('exit', () => { 
+    client.stop()
+    process.exit()
+})
+process.on('SIGINT', () => {
+    client.stop((err) => {
+        if ( err != null ) {
+            console.log(err)
+        }
+        process.exit()
+    })
+})
 
-app.listen(5000, () => {console.log('App listening on port 5000')})
+app.listen(node_port, () => {console.log(`App listening on port ${node_port}`)})
