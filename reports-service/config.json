@@ -1,7 +1,7 @@
 {
     "development": {
         "config_id": "development",
-        "app_name": "report service",
+        "app_name": "report-service",
         "app_desc": "my app desc",
         "node_port": 3003,
         "DB_NAME": "report",
@@ -9,7 +9,7 @@
         "DB_PASSWORD": "root",
         "DB_HOST": "localhost",
         "Eureka_HOST": "localhost",
-        "Eureka_PORT": 3004
+        "Eureka_PORT": 8761
     },
     "testing": {
         "config_id": "testing",
@@ -22,7 +22,7 @@
     },
     "production": {
         "config_id": "production",
-        "app_name": "report service",
+        "app_name": "report-service",
         "app_desc": "my app desc",
         "node_port": 3003,
         "DB_NAME": "report",
@@ -30,6 +30,6 @@
         "DB_PASSWORD": "root",
         "DB_HOST": "localhost",
         "Eureka_HOST": "localhost",
-        "Eureka_PORT": 3004
+        "Eureka_PORT": 8761
     }
 }

@@ -18,12 +18,12 @@ const client = new Eureka({
         app: config.app_name,
         hostName: 'localhost',
         ipAddr: '127.0.0.1',
-        statusPageUrl: `http://localhost:${config.node_port}/actuator/info`,
+        statusPageUrl: `http://${config.app_name}:${config.node_port}/actuator/info`,
         port: {
             '$': config.node_port,
             '@enabled': 'true',
         },
-        vipAddress: 'jq.test.something.com',
+        vipAddress: config.app_name,
         dataCenterInfo: {
             '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
             name: 'MyOwn',

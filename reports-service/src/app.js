@@ -19,7 +19,7 @@ const actuatorConfig = {
 }
 
 app.use('/actuator', actuator(actuatorConfig))
-client.collectDefaultMetrics({ timeout: 5000 });
+client.collectDefaultMetrics({ timeout: 5000 })
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/actuator/prometheus', (request, response) => {
     response.set('Content-Type', client.register.contentType);
     console.log(client.register)
-    response.send(client.register.metrics());
+    response.send(client.register.metrics())
 });
 
 app.use("/report", reportController)
