@@ -4,21 +4,27 @@
   "description": "",
   "main": "campaignApp.js",
   "scripts": {
-    "start": "nodemon campaignApp.js --exec babel-node --presets babel-preset-env",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/campaignApp.js --exec babel-node --presets babel-preset-env",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist",
+    "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@google-cloud/storage": "^2.5.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "cors": "^2.8.5",
     "eureka-js-client": "^4.4.2",
     "express": "^4.16.4",
     "express-actuator": "^1.1.0",
+    "express-actuator-endpoints": "^0.2.1",
     "express-jwt": "^5.3.1",
     "express-validator": "^5.3.1",
     "firebase": "^5.11.1",
+    "firebase-admin": "^7.3.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "multer": "^1.4.1",
     "mysql2": "^1.6.5",
     "nodemon": "^1.19.0",
@@ -31,5 +37,45 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.7.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "import",
+      "jest"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "rules": {
+      "jest/no-focused-tests": 2,
+      "jest/no-identical-title": 2
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

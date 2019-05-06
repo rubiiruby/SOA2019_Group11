@@ -1,14 +1,16 @@
 {
     "development": {
         "config_id": "development",
-        "app_name": "my app",
+        "app_name": "campaign service",
         "app_desc": "my app desc",
-        "node_port": 8080,
-        "json_indentation": 4,
-        "database": "campaign",
+        "node_port": 3002,
         "DB_NAME": "campaign",
         "DB_USERNAME": "root",
-        "DB_PASSWORD": "root"
+        "DB_PASSWORD": "root",
+        "DB_HOST": "localhost",
+        "Eureka_HOST": "localhost",
+        "Eureka_PORT": 3004,
+        "DEFAULT_IMG": "https://firebasestorage.googleapis.com/v0/b/soa-project-selection-234112/o/default.png?alt=media"
     },
     "testing": {
         "config_id": "testing",
@@ -16,12 +18,20 @@
     },
     "staging": {
         "config_id": "staging",
-        "node_port": 8080,
+        "node_port": 3002,
         "database": "my-app-db-stag"
     },
     "production": {
         "config_id": "production",
-        "node_port": 8080,
-        "database": "my-app-db-prod"
+        "app_name": "campaign service",
+        "app_desc": "my app desc",
+        "node_port": 3002,
+        "DB_NAME": "campaign",
+        "DB_USERNAME": "root",
+        "DB_PASSWORD": "root",
+        "DB_HOST": "localhost",
+        "Eureka_HOST": "localhost",
+        "Eureka_PORT": 3004,
+        "DEFAULT_IMG": "https://firebasestorage.googleapis.com/v0/b/soa-project-selection-234112/o/default.png?alt=media"
     }
 }

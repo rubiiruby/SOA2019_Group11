@@ -5,6 +5,10 @@ import { check, validationResult } from 'express-validator/check'
 import Multer from 'multer'
 import admin from 'firebase-admin'
 import uuidv4 from 'uuid/v4'
+import sequelize from 'sequelize'
+import moment from 'moment'
+import config from '../config/env'
+import jwt from 'express-jwt'
 
 const serviceAccount = require("../../credentials/serviceAccountKey.json");
 
@@ -24,14 +28,10 @@ const multer = Multer({
   }
 })
 
-// routes.get("/", (req, res) => {
-//   res.send("Campaign service")
-// })
-
 // Route to get all campaign
 routes.get("/", async (req, res) => {
   const campaign = await models.Campaign.findAll()
-  res.json(campaign.dataValues)
+  res.json(campaign)
 })
 
 // Route to get campaign
@@ -52,6 +52,8 @@ routes.post("/", [
   const campaign = await models.Campaign.create(req.body)
   await req.body.candidates.forEach(async candidate => {
     candidate.campaignId = campaign.dataValues.id
+    candidate.voteAmount = 0
+    candidate.imageURL = config.DEFAULT_IMG
     await models.Candidate.create(candidate)
     count++
     if ( req.body.candidates.length == count ) {
@@ -84,7 +86,7 @@ routes.put("/:campaignId", multer.array('images'), (req, res) => {
     }).catch(err => {
       console.log(err)
       res.status(500).json({
-        message: "som thing error"
+        message: "some thing error"
       })
     })
   })
@@ -107,7 +109,7 @@ routes.put("/:campaignId/candidate/:candidateId", multer.single('image'), (req, 
   }).catch(err => {
     console.log(err)
     res.status(500).json({
-      message: "som thing error"
+      message: "some thing error"
     })
   })
 })
@@ -118,17 +120,28 @@ routes.post("/:campaignId/vote", async (req, res) => {
     userId: 1,
     campaignId: req.params.campaignId
   })
+  const candidate = await models.Candidate.update({
+    voteAmount: sequelize.literal('voteAmount + 1')
+  }, {
+    where: { id: req.body.candidateId }
+  })
   res.json(voter)
 })
 
 // Route to get campaign result
 routes.get("/:campaignId/result", async (req, res) => {
-  const campaign = await models.Campaign.findOne({ where: { id: req.params.campaignId }})
-  const timeNow = new Date()
-  // timeNow.
-  // if ( campaign.dataValues.expiredDate ) {
-
-  // }
+  const campaign = await models.Campaign.findOne({ where: { id: req.params.campaignId }, include: [models.Candidate]})
+  const nowDate = moment()
+  // 01-05-2019 13:00
+  const expDate = moment(campaign.dataValues.expiredDate, "DD-MM-YYYY HH:mm")
+  console.log(nowDate.toString(), expDate.toString())
+  if ( nowDate.isAfter(expDate) ) {
+    res.json(campaign)
+  } else {
+    res.status(400).json({
+      message: "this campaign is not expired"
+    })
+  }
 })
 
 // Route to get history vote
@@ -149,6 +162,13 @@ routes.get("/test/sync", async (req, res) => {
   await models.CampaignImage.sync()
   await models.Candidate.sync()
   await models.Voter.sync()
+  res.send("ok")
+})
+
+routes.get("/test/t",
+jwt({ secret: "abcdefgggg" }), async (req, res) => {
+  console.log(jwtService.sign({test: "aaaa"}))
+  console.log(req.user)
   res.send("ok")
 })
 
