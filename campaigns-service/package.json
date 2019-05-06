@@ -1,0 +1,35 @@
+{
+  "name": "campaign-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "campaignApp.js",
+  "scripts": {
+    "start": "nodemon campaignApp.js --exec babel-node --presets babel-preset-env",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/storage": "^2.5.0",
+    "cors": "^2.8.5",
+    "eureka-js-client": "^4.4.2",
+    "express": "^4.16.4",
+    "express-actuator": "^1.1.0",
+    "express-jwt": "^5.3.1",
+    "express-validator": "^5.3.1",
+    "firebase": "^5.11.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.1",
+    "mysql2": "^1.6.5",
+    "nodemon": "^1.19.0",
+    "prom-client": "^11.3.0",
+    "sequelize": "^5.8.5"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0"
+  }
+}

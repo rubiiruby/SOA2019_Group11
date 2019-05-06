@@ -1,0 +1,35 @@
+{
+    "development": {
+        "config_id": "development",
+        "app_name": "report service",
+        "app_desc": "my app desc",
+        "node_port": 3003,
+        "DB_NAME": "report",
+        "DB_USERNAME": "root",
+        "DB_PASSWORD": "root",
+        "DB_HOST": "localhost",
+        "Eureka_HOST": "localhost",
+        "Eureka_PORT": 3004
+    },
+    "testing": {
+        "config_id": "testing",
+        "database": "my-app-db-test"
+    },
+    "staging": {
+        "config_id": "staging",
+        "node_port": 3003,
+        "database": "my-app-db-stag"
+    },
+    "production": {
+        "config_id": "production",
+        "app_name": "report service",
+        "app_desc": "my app desc",
+        "node_port": 3003,
+        "DB_NAME": "report",
+        "DB_USERNAME": "root",
+        "DB_PASSWORD": "root",
+        "DB_HOST": "localhost",
+        "Eureka_HOST": "localhost",
+        "Eureka_PORT": 3004
+    }
+}
