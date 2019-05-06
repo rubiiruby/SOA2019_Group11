@@ -9,6 +9,14 @@ import sequelize from 'sequelize'
 import moment from 'moment'
 import config from '../config/env'
 import jwt from 'express-jwt'
+import fs from 'fs'
+import path from 'path'
+import axios from 'axios'
+
+const secretKey = fs.readFileSync(
+  path.resolve(__dirname, "../../credentials/secret.key"),
+  "utf8"
+)
 
 const serviceAccount = require("../../credentials/serviceAccountKey.json");
 
@@ -37,6 +45,7 @@ routes.get("/", async (req, res) => {
 // Route to get campaign
 routes.get("/:campaignId", async (req, res) => {
   const campaign = await models.Campaign.findOne({ where: { id: req.params.campaignId }, include: [models.Candidate, models.CampaignImage]})
+  const res_report = await axios.post(`http://localhost:3003/report/${req.params.campaignId}`)
   res.json(campaign.dataValues)
 })
 
@@ -47,8 +56,8 @@ routes.post("/", [
   check('image', 'Invalid image').exists(),
   check('expiredDate', 'Invalid expiredDate').exists(),
   check('candidates', 'Invalid candidates').exists(),
-], async (req, res) => {
-  let count = 1
+], jwt({ secret: secretKey }), async (req, res) => {
+  let count = 0
   req.body.userId = req.user.jti
   const campaign = await models.Campaign.create(req.body)
   await req.body.candidates.forEach(async candidate => {
@@ -116,17 +125,26 @@ routes.put("/:campaignId/candidate/:candidateId", multer.single('image'), (req, 
 })
 
 // Route to vote campaign
-routes.post("/:campaignId/vote", async (req, res) => {
-  const voter = await models.Voter.create({
-    userId: req.user.jti,
-    campaignId: req.params.campaignId
-  })
-  const candidate = await models.Candidate.update({
-    voteAmount: sequelize.literal('voteAmount + 1')
-  }, {
-    where: { id: req.body.candidateId }
-  })
-  res.json(voter)
+routes.post("/:campaignId/vote",
+jwt({ secret: secretKey }), async (req, res) => {
+  const check = await models.Voter.findOne({ where: { userId: req.user.jti, campaignId: req.params.campaignId }})
+  if ( check !== null ) {
+    res.status(405).json({
+      message: "vote duplicate"
+    })
+  } else {
+    const voter = await models.Voter.create({
+      userId: req.user.jti,
+      campaignId: req.params.campaignId
+    })
+    const candidate = await models.Candidate.update({
+      voteAmount: sequelize.literal('voteAmount + 1')
+    }, {
+      where: { id: req.body.candidateId }
+    })
+    const res_report = await axios.post(`http://localhost:3003/report/${req.params.campaignId}/${req.body.candidateId}`)
+    res.json(voter)
+  }
 })
 
 // Route to get campaign result
@@ -146,13 +164,15 @@ routes.get("/:campaignId/result", async (req, res) => {
 })
 
 // Route to get history vote
-routes.get("/history/vote", async (req, res) => {
+routes.get("/history/vote",
+jwt({ secret: secretKey }), async (req, res) => {
   const voted = await models.Voter.findAll({ where: { userId: req.user.jti } })
   res.json(voted)
 })
 
 // Route to get hisotry create
-routes.get("/history/create", async (req, res) => {
+routes.get("/history/create",
+jwt({ secret: secretKey }), async (req, res) => {
   const voted = await models.Campaign.findAll({ where: { userId: req.user.jti } })
   res.json(voted)
 })

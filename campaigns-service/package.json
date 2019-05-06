@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@google-cloud/storage": "^2.5.0",
+    "axios": "^0.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "cors": "^2.8.5",
     "eureka-js-client": "^4.4.2",

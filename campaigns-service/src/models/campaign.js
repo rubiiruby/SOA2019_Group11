@@ -7,14 +7,14 @@ export default (sequelize, DataTypes) => {
         },
         name: DataTypes.STRING,
         detail: DataTypes.TEXT,
-        expiredDate: DataTypes.STRING
+        expiredDate: DataTypes.STRING,
+        userId: DataTypes.STRING
     })
 
     Campaign.associate = function(models) {
         models.Campaign.hasMany(models.CampaignImage, {foreignKey: 'campaignId'})
         models.Campaign.hasMany(models.Candidate, {foreignKey: 'campaignId'})
         models.Campaign.hasMany(models.Voter, {foreignKey: 'campaignId'})
-        models.Campaign.belongsTo(models.User, {foreignKey: 'userId'})
     }
     
     return Campaign

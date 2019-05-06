@@ -9,7 +9,7 @@ const { DB_NAME, DB_USERNAME, DB_PASSWORD } = config
 const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
     host: 'localhost',
     dialect: 'mysql',
-    
+    logging: false,
     pool: {
         max: 20,
         min: 0,

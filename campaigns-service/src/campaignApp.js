@@ -6,7 +6,6 @@ import models from './models'
 const { node_port } = config
 
 const initDatabase = async () => {
-    await models.User.sync()
     await models.Campaign.sync()
     await models.CampaignImage.sync()
     await models.Candidate.sync()
@@ -39,21 +38,21 @@ const client = new Eureka({
     }
 })
 
-// client.logger.level('debug');
-client.start((error) => {
-    console.log(error || 'complete');
-})
-process.on('exit', () => { 
-    client.stop()
-    process.exit()
-})
-process.on('SIGINT', () => {
-    client.stop((err) => {
-        if ( err != null ) {
-            console.log(err)
-        }
-        process.exit()
-    })
-})
+// // client.logger.level('debug');
+// client.start((error) => {
+//     console.log(error || 'complete');
+// })
+// process.on('exit', () => { 
+//     client.stop()
+//     process.exit()
+// })
+// process.on('SIGINT', () => {
+//     client.stop((err) => {
+//         if ( err != null ) {
+//             console.log(err)
+//         }
+//         process.exit()
+//     })
+// })
 
 app.listen(node_port, () => {console.log(`App listening on port ${node_port}`)})

@@ -12,21 +12,13 @@ module.exports = {
   sign: (payload, $Options) => {
     // Token signing options
     const signOptions = {
-      // issuer: $Options.issuer,
-      // subject: $Options.subject,
-      // audience: $Options.audience,
-      jwtid: "1234",
-      expiresIn: "30s", // 30 days validity
+      expiresIn: "2d", // 2 days validity
       algorithm: "HS256"
     }
     return jwt.sign(payload, secretKey, signOptions)
   },
   verify: (token, $Option) => {
     const verifyOptions = {
-      // issuer: $Option.issuer,
-      // subject: $Option.subject,
-      // audience: $Option.audience,
-      // expiresIn: "30s",
       algorithm: "HS256"
     }
     try {
@@ -34,9 +26,5 @@ module.exports = {
     } catch (err) {
       return false
     }
-  },
-  decode: token => {
-    //returns null if token is invalid
-    return jwt.decode(token, { complete: true })
   }
 }

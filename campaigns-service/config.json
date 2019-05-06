@@ -1,7 +1,7 @@
 {
     "development": {
         "config_id": "development",
-        "app_name": "campaign service",
+        "app_name": "campaign-service",
         "app_desc": "my app desc",
         "node_port": 3002,
         "DB_NAME": "campaign",
@@ -9,7 +9,7 @@
         "DB_PASSWORD": "root",
         "DB_HOST": "localhost",
         "Eureka_HOST": "localhost",
-        "Eureka_PORT": 3004,
+        "Eureka_PORT": 8761,
         "DEFAULT_IMG": "https://firebasestorage.googleapis.com/v0/b/soa-project-selection-234112/o/default.png?alt=media"
     },
     "testing": {
@@ -23,7 +23,7 @@
     },
     "production": {
         "config_id": "production",
-        "app_name": "campaign service",
+        "app_name": "campaign-service",
         "app_desc": "my app desc",
         "node_port": 3002,
         "DB_NAME": "campaign",
@@ -31,7 +31,7 @@
         "DB_PASSWORD": "root",
         "DB_HOST": "localhost",
         "Eureka_HOST": "localhost",
-        "Eureka_PORT": 3004,
+        "Eureka_PORT": 8761,
         "DEFAULT_IMG": "https://firebasestorage.googleapis.com/v0/b/soa-project-selection-234112/o/default.png?alt=media"
     }
 }

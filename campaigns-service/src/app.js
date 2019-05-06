@@ -36,13 +36,14 @@ app.get('/actuator/prometheus', (request, response) => {
 
 const secret = fs.readFileSync('credentials/secret.key')
 
-app.use(jwt({ secret: secret, requestProperty: 'jti' }))
+// app.use(jwt({ secret: secret, requestProperty: 'jti' }))
 
-app.use(function (err, req, res, next) {
-    if (err.name === 'UnauthorizedError') {
-        res.status(401).send('invalid token...');
-    }
-})
+// app.use((err, req, res, next) => {
+//     console.log(req)
+//     if (err.name === 'UnauthorizedError') {
+//         res.status(401).send('invalid token...');
+//     }
+// })
 
 app.use("/campaign", campaignController)
 

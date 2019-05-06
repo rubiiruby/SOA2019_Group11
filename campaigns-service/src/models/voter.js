@@ -4,12 +4,12 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        }
+        },
+        userId: DataTypes.STRING
     })
 
     Voter.associate = function(models) {
         models.Voter.belongsTo(models.Campaign, {foreignKey: 'campaignId'})
-        models.Voter.belongsTo(models.User, {foreignKey: 'userId'})
     }
 
     return Voter
