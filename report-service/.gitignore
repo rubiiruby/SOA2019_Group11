@@ -1,8 +1,0 @@
-# dependencies
-/node_modules
-
-/config
-.vscode/settings.json
-
-# credentials
-/credentials/
