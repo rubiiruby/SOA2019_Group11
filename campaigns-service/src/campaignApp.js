@@ -38,21 +38,21 @@ const client = new Eureka({
     }
 })
 
-// // client.logger.level('debug');
-// client.start((error) => {
-//     console.log(error || 'complete');
-// })
-// process.on('exit', () => { 
-//     client.stop()
-//     process.exit()
-// })
-// process.on('SIGINT', () => {
-//     client.stop((err) => {
-//         if ( err != null ) {
-//             console.log(err)
-//         }
-//         process.exit()
-//     })
-// })
+// client.logger.level('debug');
+client.start((error) => {
+    console.log(error || 'complete');
+})
+process.on('exit', () => { 
+    client.stop()
+    process.exit()
+})
+process.on('SIGINT', () => {
+    client.stop((err) => {
+        if ( err != null ) {
+            console.log(err)
+        }
+        process.exit()
+    })
+})
 
 app.listen(node_port, () => {console.log(`App listening on port ${node_port}`)})

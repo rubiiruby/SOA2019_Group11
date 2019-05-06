@@ -5,9 +5,9 @@ import config from '../config/env'
 
 const db = {}
 const basename = path.basename(__filename)
-const { DB_NAME, DB_USERNAME, DB_PASSWORD } = config
+const { DB_NAME, DB_USERNAME, DB_PASSWORD, DB_HOST } = config
 const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
-    host: 'localhost',
+    host: DB_HOST,
     dialect: 'mysql',
     logging: false,
     pool: {

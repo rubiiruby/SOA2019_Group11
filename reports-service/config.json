@@ -7,7 +7,7 @@
         "DB_NAME": "report",
         "DB_USERNAME": "root",
         "DB_PASSWORD": "root",
-        "DB_HOST": "localhost",
+        "DB_HOST": "35.247.147.70",
         "Eureka_HOST": "localhost",
         "Eureka_PORT": 8761
     },
@@ -28,7 +28,7 @@
         "DB_NAME": "report",
         "DB_USERNAME": "root",
         "DB_PASSWORD": "root",
-        "DB_HOST": "localhost",
+        "DB_HOST": "35.247.147.70",
         "Eureka_HOST": "localhost",
         "Eureka_PORT": 8761
     }

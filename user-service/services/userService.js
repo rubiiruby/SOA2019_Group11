@@ -46,15 +46,13 @@ module.exports = {
       .then((user) => {
         // PAYLOAD
         let payload = {
-          userId: firebase.auth().currentUser.uid,
+          jti: firebase.auth().currentUser.uid,
           fullName: firebase.auth().currentUser.displayName
         }
 
         // Signing options
         sOptions = {
-          issuer: "Authorizaxtion/Resource/This server",
-          subject: "iam@user.me",
-          audience: "Client_Identity" // this should be provided by client
+          // this should be provided by client
         }
 
         const payload_res = {
@@ -72,8 +70,5 @@ module.exports = {
           err: errorMessage
         })
       })
-  },
-  wait: (req, res) => {
-    
-  } 
+  }
 }

@@ -7,7 +7,7 @@
         "DB_NAME": "campaign",
         "DB_USERNAME": "root",
         "DB_PASSWORD": "root",
-        "DB_HOST": "localhost",
+        "DB_HOST": "35.247.147.70",
         "Eureka_HOST": "localhost",
         "Eureka_PORT": 8761,
         "DEFAULT_IMG": "https://firebasestorage.googleapis.com/v0/b/soa-project-selection-234112/o/default.png?alt=media"
@@ -29,7 +29,7 @@
         "DB_NAME": "campaign",
         "DB_USERNAME": "root",
         "DB_PASSWORD": "root",
-        "DB_HOST": "localhost",
+        "DB_HOST": "35.247.147.70",
         "Eureka_HOST": "localhost",
         "Eureka_PORT": 8761,
         "DEFAULT_IMG": "https://firebasestorage.googleapis.com/v0/b/soa-project-selection-234112/o/default.png?alt=media"
