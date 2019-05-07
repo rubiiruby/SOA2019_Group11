@@ -45,7 +45,7 @@ routes.get("/", async (req, res) => {
 // Route to get campaign
 routes.get("/:campaignId", async (req, res) => {
   const campaign = await models.Campaign.findOne({ where: { id: req.params.campaignId }, include: [models.Candidate, models.CampaignImage]})
-  const res_report = await axios.post(`http://localhost:3003/report/${req.params.campaignId}`)
+  const res_report = await axios.post(`http://localhost:3003/report/${req.params.campaignId}`).catch(err => { console.log(err.Error) })
   res.json(campaign.dataValues)
 })
 
@@ -142,7 +142,7 @@ jwt({ secret: secretKey }), async (req, res) => {
     }, {
       where: { id: req.body.candidateId }
     })
-    const res_report = await axios.post(`http://localhost:3003/report/${req.params.campaignId}/${req.body.candidateId}`)
+    const res_report = await axios.post(`http://localhost:3003/report/${req.params.campaignId}/${req.body.candidateId}`).catch(err => { console.log(err.Error) })
     res.json(voter)
   }
 })
