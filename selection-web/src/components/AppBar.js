@@ -54,12 +54,6 @@ const AppBar = props => {
             trigger={<span>{props.username}</span>}
           >
             <Dropdown.Menu>
-              <Dropdown.Item>
-                <Link to="/u/campaign" style={{ textDecoration: "none" }}>
-                  <span style={{ color: "black" }}>My Campaign</span>
-                </Link>
-              </Dropdown.Item>
-
               <Dropdown.Item
                 text="Sign Out"
                 icon="sign-out"

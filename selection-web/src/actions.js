@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const userService = "http://192.168.1.52:3001/user/";
-const campaignService = "http://192.168.1.52:3002/";
-const reportService = 'http://192.168.1.52:3003/'
+const userService = "http://localhost:3001/user/";
+const campaignService = "http://localhost:3002/";
+const reportService = "http://localhost:3003/";
 
 export const reset = type => ({
   type: `RESET_${type}`
@@ -62,8 +62,9 @@ export const signin = (username, password) => async dispatch => {
     dispatch(updateString("AUTHORIZED", "SIGNIN"));
     dispatch(updateString("USERNAME", response.data.fullName));
     dispatch(updateString("TOKEN", response.data.Authorization));
-    console.log(response.data.Authorization)
-    axios.defaults.headers.common['authorization'] = response.data.Authorization;
+    console.log(response.data.Authorization);
+    axios.defaults.headers.common["authorization"] =
+      response.data.Authorization;
 
     console.log("signin success");
   } catch (error) {
@@ -76,7 +77,7 @@ export const signin = (username, password) => async dispatch => {
 export const signout = () => dispatch => {
   dispatch(updateString("AUTHORIZED", "SIGNOUT"));
   dispatch(updateString("TOKEN", ""));
-  axios.defaults.headers.common['authorization'] = '';
+  axios.defaults.headers.common["authorization"] = "";
 };
 export const createCampaign = campaign => async dispatch => {
   dispatch(fetchStart("CREATE_CAMPAIGN"));
@@ -184,11 +185,11 @@ export const getVotedCampaign = async id => {
 };
 export const getResult = async id => {
   const response = await axios.get(`${campaignService}campaign/${id}/result`);
-  console.log(response)
-  return response.data
-}
+  console.log(response);
+  return response.data;
+};
 export const getReport = async id => {
   const response = await axios.get(`${reportService}report/${id}`);
-  console.log(response)
-  return response.data
-}
+  console.log(response);
+  return response.data;
+};
