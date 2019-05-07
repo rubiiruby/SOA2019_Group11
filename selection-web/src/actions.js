@@ -67,7 +67,7 @@ export const signin = (username, password) => async dispatch => {
     //  "authorization"
     //] = response.data.Authorization.replace(/^"(.*)"$/, "$1");
     axios.defaults.headers.common["authorization"] =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJ6a2p4cHppb0tEUEtHQUZSQlVpS29CTGllVWkxIiwiZnVsbE5hbWUiOiJzdXBwYXNlayBtYW5tdW5raWoiLCJpYXQiOjE1NTcyMDc3NTUsImV4cCI6MTczMDAwNzc1NX0._kB5FGXckv8I7MywDdFkkilztTJr3GdXPescvtyDBkk";
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJ6a2p4cHppb0tEUEtHQUZSQlVpS29CTGllVWkxIiwiZnVsbE5hbWUiOiJzdXBwYXNlayBtYW5tdW5raWoiLCJpYXQiOjE1NTcxNTc2NjcsImV4cCI6MTcyOTk1NzY2N30.06N-zWcKKFReR76usqBxSgMY9MUv_8pJirLvfl9Ta7o";
     console.log("signin success");
   } catch (error) {
     console.log(error);
