@@ -1,0 +1,19 @@
+{
+  "width": "1015",
+  "createStep": "3",
+  "currentStep": "3",
+  "previewImage": "[{\"path\":\"Preparation-For-Exams.jpg\",\"preview\":\"blob:http://localhost:3000/07826eba-04a6-4dcc-9a5e-4a052ecaafbb\"},{\"path\":\"screencapture-resume-io-r-w953tFY4h-2019-01-16-15_07_39.png\",\"preview\":\"blob:http://localhost:3000/991edd4d-fa8d-4791-bec4-02fcaa1b832c\"}]",
+  "createCampaignTitle": "\"Campaign test\"",
+  "createCampaignDes": "\"test campaign\"",
+  "createCampaignChoices": "[{\"title\":\"choice 1\",\"detail\":\"\",\"image\":{\"path\":\"PinClipart.com_chicken-silhouette-clip-art_443873.png\",\"preview\":\"blob:http://localhost:3000/4e602b99-94bc-4c28-a21c-1f70815dc9e7\"},\"id\":\"unique\"},{\"title\":\"choice 2\",\"detail\":\"\",\"image\":{\"path\":\"51968838_388519168632115_4846653328320364544_n.png\",\"preview\":\"blob:http://localhost:3000/575b3f33-a7ad-4046-8ba1-11e84796301f\"},\"id\":\"jvd9atze\"},{\"title\":\"\",\"detail\":\"\",\"image\":{},\"id\":\"jvd9b2lg\"}]",
+  "endDate": "\"07-05-2019 10:55\"",
+  "selectedChoice": "0",
+  "signinFetch": "{\"loading\":false,\"status\":\"success\",\"response\":{\"data\":{\"Authorization\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJ6a2p4cHppb0tEUEtHQUZSQlVpS29CTGllVWkxIiwiZnVsbE5hbWUiOiJzdXBwYXNlayBtYW5tdW5raWoiLCJpYXQiOjE1NTcyMDMwNDUsImV4cCI6MTczMDAwMzA0NX0.i4hwgQU8xQ8Z4xeNlOoDsdMJHxbG0yJKB5aF1p-FCAA\",\"fullName\":\"suppasek manmunkij\"},\"status\":200,\"statusText\":\"OK\",\"headers\":{\"content-type\":\"application/json; charset=utf-8\"},\"config\":{\"transformRequest\":{},\"transformResponse\":{},\"timeout\":0,\"xsrfCookieName\":\"XSRF-TOKEN\",\"xsrfHeaderName\":\"X-XSRF-TOKEN\",\"maxContentLength\":-1,\"headers\":{\"Accept\":\"application/json, text/plain, */*\",\"authorization\":\"\",\"Content-Type\":\"application/json;charset=utf-8\",\"Authorization\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJ6a2p4cHppb0tEUEtHQUZSQlVpS29CTGllVWkxIiwiZnVsbE5hbWUiOiJzdXBwYXNlayBtYW5tdW5raWoiLCJpYXQiOjE1NTcyMDI4NzgsImV4cCI6MTczMDAwMjg3OH0.zFFP2seq5ZP34jSJjyKdB8_WOu1Hu2tHwIvu0SNQXho\"},\"method\":\"post\",\"url\":\"http://35.247.147.70:3001/user/signin\",\"data\":\"{\\\"username\\\":\\\"boss@mail.com\\\",\\\"password\\\":\\\"12345678\\\"}\"},\"request\":{}}}",
+  "authorized": "\"SIGNIN\"",
+  "createCampaignFetch": "{\"status\":\"idle\",\"loading\":false}",
+  "registerFetch": "{\"status\":\"idle\",\"loading\":false}",
+  "username": "\"suppasek manmunkij\"",
+  "token": "\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJ6a2p4cHppb0tEUEtHQUZSQlVpS29CTGllVWkxIiwiZnVsbE5hbWUiOiJzdXBwYXNlayBtYW5tdW5raWoiLCJpYXQiOjE1NTcyMDMwNDUsImV4cCI6MTczMDAwMzA0NX0.i4hwgQU8xQ8Z4xeNlOoDsdMJHxbG0yJKB5aF1p-FCAA\"",
+  "voteFetch": "{\"status\":\"idle\",\"loading\":false}",
+  "_persist": "{\"version\":-1,\"rehydrated\":true}"
+}

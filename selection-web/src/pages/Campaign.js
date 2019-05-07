@@ -18,7 +18,7 @@ import { updateValue, getCampaign, vote } from "../actions";
 import { withRouter } from "react-router-dom";
 import ThanksModal from "../components/ThanksModal";
 import ErrorModal from "../components/ErrorModal";
-import moment from 'moment'
+import moment from "moment";
 
 const imageStyle = {
   maxWidth: "100%",
@@ -34,7 +34,7 @@ const Campaign = props => {
   const [campaign, setCampaign] = useState({ CampaignImages: [] });
   const [loading, setLoading] = useState(false);
   const [thankModal, setThankModal] = useState(false);
-  const [errorModal, setErrorModal] = useState(false)
+  const [errorModal, setErrorModal] = useState(false);
   useEffect(() => {
     const fetchData = async id => {
       try {
@@ -62,16 +62,15 @@ const Campaign = props => {
   useEffect(() => {
     if (props.voteFetch.status === "success") {
       setThankModal(true);
-    }
-    else if (props.voteFetch.status === 'fail') {
-      setErrorModal(true)
+    } else if (props.voteFetch.status === "fail") {
+      setErrorModal(true);
     }
   });
   useEffect(() => {
     if (moment(campaign.expiredDate).isBefore(Date.now())) {
       props.history.push(`/campaign/${props.match.params.id}/summary`);
     }
-  })
+  });
 
   const HeaderSection = () => (
     <div style={{ display: "inline-block" }}>
@@ -82,9 +81,7 @@ const Campaign = props => {
       >
         {campaign.name}
         <Header.Subheader>
-          <Label
-            color="red"
-          >
+          <Label color="red">
             {campaign.expiredDate}
             <Label.Detail>Expire Date</Label.Detail>
           </Label>

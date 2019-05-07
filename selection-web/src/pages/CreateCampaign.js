@@ -50,7 +50,6 @@ const CreateCampaign = props => {
         header="Confirm"
         content="Are you really sure?"
         path="/campaign"
-        loading={props.fetch.loading}
         action={() => {
           const choices = props.choices;
           choices.forEach(function(choice) {

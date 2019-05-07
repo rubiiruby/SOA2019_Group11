@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const userService = "http://localhost:3001/user/";
-const campaignService = "http://localhost:3002/";
-const reportService = "http://localhost:3003/";
+const userService = "http://35.247.147.70:3001/user/";
+const campaignService = "http://35.247.147.70:3002/";
+const reportService = "http://35.247.147.70:3003/";
 
 export const reset = type => ({
   type: `RESET_${type}`
@@ -63,9 +63,11 @@ export const signin = (username, password) => async dispatch => {
     dispatch(updateString("USERNAME", response.data.fullName));
     dispatch(updateString("TOKEN", response.data.Authorization));
     console.log(response.data.Authorization);
+    //axios.defaults.headers.common[
+    //  "authorization"
+    //] = response.data.Authorization.replace(/^"(.*)"$/, "$1");
     axios.defaults.headers.common["authorization"] =
-      response.data.Authorization;
-
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJ6a2p4cHppb0tEUEtHQUZSQlVpS29CTGllVWkxIiwiZnVsbE5hbWUiOiJzdXBwYXNlayBtYW5tdW5raWoiLCJpYXQiOjE1NTcyMDc3NTUsImV4cCI6MTczMDAwNzc1NX0._kB5FGXckv8I7MywDdFkkilztTJr3GdXPescvtyDBkk";
     console.log("signin success");
   } catch (error) {
     console.log(error);

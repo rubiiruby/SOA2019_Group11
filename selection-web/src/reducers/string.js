@@ -4,7 +4,7 @@ export default function createStringWithNamedType(stringName) {
       case `UPDATE_STRING_${stringName}`:
         return action.string;
       case `RESET_${stringName}`:
-        return "";
+        return string;
       default:
         return string;
     }

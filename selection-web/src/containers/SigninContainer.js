@@ -11,6 +11,7 @@ const SigninContainer = props => {
       props.setModal(false);
     }
   }, [props.status]);
+  console.log(props.token);
   return (
     <SigninModal
       {...{ username, setUsername, password, setPassword }}
@@ -19,7 +20,8 @@ const SigninContainer = props => {
   );
 };
 const mapStateToProps = state => ({
-  status: state.signinFetch
+  status: state.signinFetch,
+  token: state.token
 });
 
 const mapDispatchToProps = dispatch => ({
