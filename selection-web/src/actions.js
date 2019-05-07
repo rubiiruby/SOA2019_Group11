@@ -121,11 +121,8 @@ export const createCampaign = campaign => async dispatch => {
           }`,
           candidateImage
         );
-
-        if (index === campaign.candidates.length - 1) {
-          dispatch(fetchSuccess("CREATE_CAMPAIGN", response));
-        }
       }
+      dispatch(fetchSuccess("CREATE_CAMPAIGN", response));
     });
 
     const mergeResponse = { ...response, ...uploadImage };
