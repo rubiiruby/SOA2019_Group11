@@ -14,6 +14,7 @@ const OptionForm = props => {
       />
       <div>
         <DateTimeInput
+          id='datetime'
           style={styles.item}
           clearable
           clearIcon={<Icon name="remove" color="red" />}

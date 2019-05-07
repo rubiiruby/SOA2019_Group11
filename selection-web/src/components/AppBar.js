@@ -55,7 +55,7 @@ const AppBar = props => {
           >
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to="/user/campaign" style={{ textDecoration: "none" }}>
+                <Link to="/u/campaign" style={{ textDecoration: "none" }}>
                   <span style={{ color: "black" }}>My Campaign</span>
                 </Link>
               </Dropdown.Item>

@@ -8,7 +8,13 @@ const Choices = props => (
       {props.choices && (
         <Item.Group unstackable divided>
           {props.choices.map((choice, index) => (
-            <Choice key={index} {...choice} value={index} {...props} />
+            <Choice
+              key={index}
+              image={props.choices[index].imageURL}
+              {...choice}
+              value={index}
+              {...props}
+            />
           ))}
         </Item.Group>
       )}

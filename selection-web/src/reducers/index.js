@@ -21,5 +21,6 @@ export default combineReducers({
   createCampaignFetch: createFetchWithNamedType("CREATE_CAMPAIGN"),
   registerFetch: createFetchWithNamedType("REGISTER"),
   username: createStringWithNamedType("USERNAME"),
-  token: createStringWithNamedType("TOKEN")
+  token: createStringWithNamedType("TOKEN"),
+  voteFetch: createFetchWithNamedType("VOTE")
 });

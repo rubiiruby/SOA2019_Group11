@@ -28,10 +28,7 @@ const Choice = props => (
           <Item>
             <Grid>
               <Grid.Column width={props.mobile ? 16 : 3}>
-                <Item.Image
-                  size="small"
-                  src="https://react.semantic-ui.com/images/wireframe/image.png"
-                />
+                <Item.Image size="small" src={props.image} />
               </Grid.Column>
 
               <Grid.Column width={props.mobile ? 16 : 13}>

@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const userService = "http://localhost:5000/user/";
-const campaignService = "http://localhost:8080/";
+const userService = "http://192.168.1.52:3001/user/";
+const campaignService = "http://192.168.1.52:3002/";
+const reportService = 'http://192.168.1.52:3003/'
 
 export const reset = type => ({
   type: `RESET_${type}`
@@ -61,9 +62,8 @@ export const signin = (username, password) => async dispatch => {
     dispatch(updateString("AUTHORIZED", "SIGNIN"));
     dispatch(updateString("USERNAME", response.data.fullName));
     dispatch(updateString("TOKEN", response.data.Authorization));
-    axios.defaults.headers = {
-      Authorization: response.data.Authorization
-    };
+    console.log(response.data.Authorization)
+    axios.defaults.headers.common['authorization'] = response.data.Authorization;
 
     console.log("signin success");
   } catch (error) {
@@ -76,6 +76,7 @@ export const signin = (username, password) => async dispatch => {
 export const signout = () => dispatch => {
   dispatch(updateString("AUTHORIZED", "SIGNOUT"));
   dispatch(updateString("TOKEN", ""));
+  axios.defaults.headers.common['authorization'] = '';
 };
 export const createCampaign = campaign => async dispatch => {
   dispatch(fetchStart("CREATE_CAMPAIGN"));
@@ -88,8 +89,9 @@ export const createCampaign = campaign => async dispatch => {
     const response = await axios.post(`${campaignService}campaign`, campaign);
     console.log("create success");
     console.log(response);
-    const uploadImage = await axios.post(
-      `${campaignService}campaign/${response.data.id}/images`,
+
+    const uploadImage = await axios.put(
+      `${campaignService}campaign/${response.data.id}`,
       bodyFormData,
       {
         headers: {
@@ -98,9 +100,33 @@ export const createCampaign = campaign => async dispatch => {
       }
     );
     console.log(uploadImage);
+
+    response.data.Candidates.forEach(async (candidate, index) => {
+      var candidateImage = new FormData();
+      console.log(campaign.candidates[index]);
+      if (
+        Object.getOwnPropertyNames(campaign.candidates[index].image).length !==
+        0
+      ) {
+        candidateImage.append("image", campaign.candidates[index].image);
+        console.log(
+          `put ${campaignService}${response.data.id}/candidate/${candidate.id}`
+        );
+        const uploadCandidatePic = await axios.put(
+          `${campaignService}campaign/${response.data.id}/candidate/${
+            candidate.id
+          }`,
+          candidateImage
+        );
+
+        if (index === campaign.candidates.length - 1) {
+          dispatch(fetchSuccess("CREATE_CAMPAIGN", response));
+        }
+      }
+    });
+
     const mergeResponse = { ...response, ...uploadImage };
     console.log(mergeResponse);
-    dispatch(fetchSuccess("CREATE_CAMPAIGN", mergeResponse));
     //dispatch(resetCreate());
   } catch (error) {
     console.log("create fail");
@@ -124,16 +150,18 @@ export const register = user => async dispatch => {
 export const vote = (campaignId, choiceId) => async dispatch => {
   dispatch(fetchStart("VOTE"));
   try {
+    console.log(`vote start ${campaignService}campaign/${campaignId}/vote`);
     const response = await axios.post(
       `${campaignService}campaign/${campaignId}/vote`,
-      { candidate: choiceId }
+      { candidateId: choiceId }
     );
-    dispatch(fetchSuccess("VOTE"), response);
     console.log(response);
+    dispatch(fetchSuccess("VOTE"), response);
   } catch (error) {
     dispatch(fetchFailure("VOTE"), error);
     console.log("vote failure");
   }
+  dispatch(fetchIdle("VOTE"));
 };
 export const resetCreate = () => dispatch => {
   dispatch(reset("STEP"));
@@ -145,7 +173,22 @@ export const resetCreate = () => dispatch => {
   dispatch(reset("END_DATE"));
 };
 export const getCampaign = async id => {
-  let response = await axios.get(`${campaignService}campaign/${id}`);
+  const response = await axios.get(`${campaignService}campaign/${id}`);
   console.log(response);
   return response.data;
 };
+export const getVotedCampaign = async id => {
+  const response = await axios.get(`${campaignService}history/vote`, id);
+  console.log(response);
+  return response.data;
+};
+export const getResult = async id => {
+  const response = await axios.get(`${campaignService}campaign/${id}/result`);
+  console.log(response)
+  return response.data
+}
+export const getReport = async id => {
+  const response = await axios.get(`${reportService}report/${id}`);
+  console.log(response)
+  return response.data
+}

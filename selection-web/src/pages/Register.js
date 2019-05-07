@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Form,
@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { register } from "../actions";
 import { Redirect } from "react-router";
 import ConfirmModal from "../components/ConfirmModal";
+import ErrorModal from "../components/ErrorModal";
 
 const Register = props => {
   const [firstName, setFirstName] = useState("");
@@ -21,6 +22,12 @@ const Register = props => {
   const [password, setPassword] = useState("");
   const [signupModal, setSignupModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
+  const [errorModal, setErrorModal] = useState(false)
+  useEffect(() => {
+    if (props.fetch.status === 'fail') {
+      setErrorModal(true)
+    }
+  })
   return (
     <Responsive fireOnMount onUpdate={props.updateEvent}>
       <AppBar />
@@ -93,6 +100,7 @@ const Register = props => {
           </Grid.Row>
         </Grid>
       </Segment>
+      <ErrorModal open={errorModal} setModal={setErrorModal} />
       {props.fetch.status === "success" && <Redirect to="/" exact push />}
       <ConfirmModal
         modal={signupModal}
