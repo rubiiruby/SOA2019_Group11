@@ -37,6 +37,7 @@ const multer = Multer({
 })
 
 // Route to get all campaign
+// test
 routes.get("/", async (req, res) => {
   const campaign = await models.Campaign.findAll()
   res.json(campaign)
