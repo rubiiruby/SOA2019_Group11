@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/rubiiruby/SOA2019_Group11.svg?style=svg)](https://circleci.com/gh/rubiiruby/SOA2019_Group11)
 # Selection 
 
 Web for vote
