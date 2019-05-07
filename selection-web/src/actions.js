@@ -123,6 +123,7 @@ export const createCampaign = campaign => async dispatch => {
         );
       }
       dispatch(fetchSuccess("CREATE_CAMPAIGN", response));
+      dispatch(fetchIdle("CREATE_CAMPAIGN"));
     });
 
     const mergeResponse = { ...response, ...uploadImage };
