@@ -40,7 +40,7 @@ jobs:
                     docker push $DOCKER_USERNAME/campaigns-service
 
     report-service:
-        working_directory: ~/SOA2019_Group11/report-service/
+        working_directory: ~/SOA2019_Group11/reports-service/
         docker:
             - image: circleci/node:11.13.0
         steps:
