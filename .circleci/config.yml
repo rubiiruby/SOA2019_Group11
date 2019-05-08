@@ -36,8 +36,8 @@ jobs:
                 name: Build Docker Customer service Image
                 command: |
                     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                    docker build -t $DOCKER_USERNAME/campaigns-service .
-                    docker push $DOCKER_USERNAME/campaigns-service
+                    docker build -t $DOCKER_USERNAME/campaign-service .
+                    docker push $DOCKER_USERNAME/campaign-service
 
     report-service:
         working_directory: ~/SOA2019_Group11/reports-service/
@@ -56,7 +56,7 @@ jobs:
                 command: |
                     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                     docker build -t $DOCKER_USERNAME/report-service .
-                    docker push $DOCKER_USERNAME/report-service:
+                    docker push $DOCKER_USERNAME/report-service
 
     web:
         working_directory: ~/SOA2019_Group11/selection-web
