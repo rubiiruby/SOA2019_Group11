@@ -47,7 +47,7 @@ jobs:
             - setup_remote_docker:
                 docker_layer_caching: true
             - checkout:
-                path: ~/SOA2019_Group6
+                path: ~/SOA2019_Group11
             - run:
                 name: Install module
                 command: npm install
