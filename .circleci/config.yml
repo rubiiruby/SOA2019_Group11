@@ -1,86 +1,103 @@
 version: 2
 jobs:
-    user-service: 
-      working_directory: ~/SOA2019_Group11/user-service 
-      docker:
-        - image: google/cloud-sdk
-      steps:
-        - setup_remote_docker:
+
+    user-service:
+        working_directory: ~/SOA2019_Group11/user-service/
+        docker:
+            - image: circleci/node:11.13.0
+        steps:
+            - setup_remote_docker:
                 docker_layer_caching: true
-        - checkout:
-            path: ~/SOA2019_Group11
-        - run:
-            name: To authenticate using JSON key file
-            command: |
-              echo $PASS > gcloud-service-key.json
-              gcloud auth activate-service-account ${ACCOUNT_ID} --key-file gcloud-service-key.json
-              gcloud --quiet config set project $PROJECT_ID
-              gcloud auth configure-docker
-        - run:
-            name: 'Build Project'
-            command: |
-              docker build -t gcr.io/$PROJECT_ID/user-service:${CIRCLE_SHA1} .
-              docker push gcr.io/$PROJECT_ID/user-service:${CIRCLE_SHA1}
-              # gcloud config set run/region us-central1
-              # gcloud beta run deploy user-service --image gcr.io/$PROJECT_ID/user_service:${CIRCLE_SHA1}
-    campaigns-service: 
-      working_directory: ~/SOA2019_Group11/campaigns-service
-      docker:
-        - image: google/cloud-sdk
-      steps:
-        - setup_remote_docker:
+            - checkout:
+                path: ~/SOA2019_Group11
+            - run:
+                name: Install module
+                command: npm install
+            - run:
+                name: Build Docker mechanics service Image
+                command: |
+                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                    docker build -t $DOCKER_USERNAME/user-service .
+                    docker push $DOCKER_USERNAME/user-service
+
+    campaign-service:
+        working_directory: ~/SOA2019_Group11/campaigns-service/
+        docker:
+            - image: circleci/node:11.13.0
+        steps:
+            - setup_remote_docker:
                 docker_layer_caching: true
-        - checkout:
-            path: ~/SOA2019_Group11
-        - run:
-            name: To authenticate using JSON key file
-            command: |
-              echo $PASS > gcloud-service-key.json
-              gcloud auth activate-service-account ${ACCOUNT_ID} --key-file gcloud-service-key.json
-              gcloud --quiet config set project $PROJECT_ID
-              gcloud auth configure-docker
-        - run:
-            name: 'Build Project'
-            command: |
-              docker build -t gcr.io/$PROJECT_ID/campaigns-service:${CIRCLE_SHA1} .
-              docker push gcr.io/$PROJECT_ID/campaigns-service:${CIRCLE_SHA1}
-    reports-service: 
-      working_directory: ~/SOA2019_Group11/reports-service
-      docker:
-        - image: google/cloud-sdk
-      steps:
-        - setup_remote_docker:
+            - checkout:
+                path: ~/SOA2019_Group11
+            - run:
+                name: Install module
+                command: npm install
+            - run:
+                name: Build Docker Customer service Image
+                command: |
+                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                    docker build -t $DOCKER_USERNAME/campaigns-service .
+                    docker push $DOCKER_USERNAME/campaigns-service
+
+    report-service:
+        working_directory: ~/SOA2019_Group11/report-service/
+        docker:
+            - image: circleci/node:11.13.0
+        steps:
+            - setup_remote_docker:
                 docker_layer_caching: true
-        - checkout:
-            path: ~/SOA2019_Group11
-        - run:
-            name: To authenticate using JSON key file
-            command: |
-              echo $PASS > gcloud-service-key.json
-              gcloud auth activate-service-account ${ACCOUNT_ID} --key-file gcloud-service-key.json
-              gcloud --quiet config set project $PROJECT_ID
-              gcloud auth configure-docker
-        - run:
-            name: 'Build Project'
-            command: |
-              docker build -t gcr.io/$PROJECT_ID/reports-service:${CIRCLE_SHA1} .
-              docker push gcr.io/$PROJECT_ID/reports-service:${CIRCLE_SHA1}
-    # server-deploy:
-    #   machine:
-    #     enabled: true
-    #   steps:
-    #     - run:
-    #         name: Secure deploy
-    #         command: |
-    #             docker-compose up
-                
+            - checkout:
+                path: ~/SOA2019_Group6
+            - run:
+                name: Install module
+                command: npm install
+            - run:
+                name: Build Docker request service Image
+                command: |
+                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                    docker build -t $DOCKER_USERNAME/report-service .
+                    docker push $DOCKER_USERNAME/report-service:
+
+    web:
+        working_directory: ~/SOA2019_Group11/selection-web
+        docker:
+            - image: circleci/node:11.13.0
+        steps:
+            - setup_remote_docker:
+                docker_layer_caching: true
+            - checkout:
+                path: ~/SOA2019_Group11
+            - run:
+                name: Install module
+                command: npm install
+            - run:
+                name: Build Docker request service Image
+                command: |
+                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                    docker build -t $DOCKER_USERNAME/selection-web .
+                    docker push $DOCKER_USERNAME/selection-web
+
 workflows:
-  version: 2
-  deploy:
-    jobs:
-      - user-service
-      - campaigns-service
-      - reports-service
-        # - service-deploy:
-        #     requires:
-        #       - user-service
+    version: 2
+    complie:
+        jobs:
+            - user-service:
+                filters:
+                    branches:
+                        only:
+                            - master
+            - campaign-service:
+                filters:
+                    branches:
+                        only:
+                            - master
+            - report-service:
+                filters:
+                    branches:
+                        only:
+                            - master
+            - web:
+                filters:
+                    branches:
+                        only:
+                            - master
